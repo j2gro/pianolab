@@ -1,0 +1,23 @@
+{
+  "name": "@pianolab/engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/*.test.ts"
+  },
+  "dependencies": {
+    "@pianolab/lesson-schema": "*"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.5",
+    "typescript": "~6.0.2"
+  }
+}

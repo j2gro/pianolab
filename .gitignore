@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+*.log
+.turbo
+coverage
+.env
+.env.*
+!.env.example
+apps/api/data

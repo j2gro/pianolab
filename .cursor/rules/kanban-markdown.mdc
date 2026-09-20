@@ -1,0 +1,27 @@
+---
+description: Require a Kanban Markdown card for every work item before and after coding
+alwaysApply: true
+---
+
+# Board tracking (required)
+
+Every distinct work item (feature, bug, enhancement, research, refactor) **must** exist as a card in `.devtool/features/` before implementation starts. This is not optional for “small” code or docs changes.
+
+## Before coding
+
+1. Scan `.devtool/features/` and `done/` for an existing card (match title/intent).
+2. If none: create one (`todo` if the user asked to do it now, else `backlog`). Then set `in-progress` when you start.
+3. If one exists: set `in-progress`, update `modified`. Do not duplicate.
+4. One card per work item. Split only when the user asks for separate tracks.
+
+## During / after
+
+- Ready to verify: `review`. Finished: `done`, set `completedAt`, move to `.devtool/features/done/`.
+- If the request grows, add cards for the extra items (do not leave them only in chat).
+
+## Skip only when
+
+- Question/explanation with no repo change, **or**
+- User explicitly says not to put it on the board.
+
+Card format and ID rules: follow `.cursor/skills/kanban-markdown/SKILL.md`.

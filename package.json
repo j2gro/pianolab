@@ -1,0 +1,32 @@
+{
+  "name": "pianolab",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:web": "npm run dev -w @pianolab/web",
+    "dev:api": "npm run dev -w @pianolab/api",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "oxlint .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "oxlint": "^1.81.0",
+    "tsx": "^4.20.5",
+    "typescript": "~6.0.2"
+  },
+  "overrides": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}
