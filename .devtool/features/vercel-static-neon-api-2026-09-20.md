@@ -1,11 +1,11 @@
 ---
 id: "vercel-static-neon-api-2026-09-20"
-status: "review"
+status: "in-progress"
 priority: "high"
 assignee: null
 dueDate: null
 created: "2026-09-21T01:02:00.000Z"
-modified: "2026-09-21T01:20:00.000Z"
+modified: "2026-09-21T01:16:00.000Z"
 completedAt: null
 labels: ["feature"]
 order: "a10"
