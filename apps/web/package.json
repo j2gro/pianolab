@@ -9,7 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "typecheck": "tsc -b",
-    "vercel-build": "vite build"
+    "vercel-build": "node ../../scripts/bundle-api.mjs && vite build"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
@@ -26,7 +26,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@types/three": "^0.180.0",
-    "@vitejs/plugin-react": "^6.1.1",
+    "esbuild": "~0.28.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   }
