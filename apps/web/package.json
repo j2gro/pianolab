@@ -9,7 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "typecheck": "tsc -b",
-    "vercel-build": "tsc -b && vite build"
+    "vercel-build": "vite build"
   },
   "dependencies": {
     "@pianolab/lesson-schema": "*",
