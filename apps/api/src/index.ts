@@ -28,7 +28,7 @@ if (useTls) {
 }
 
 if (staticDir && !existsSync(staticDir)) {
-  throw new Error(`STATIC_DIR does not exist: ${staticDir}. Run npm run build --workspace=@pianolab/web first.`);
+  throw new Error(`STATIC_DIR does not exist: ${staticDir}. Run npm run build -w @pianolab/web first.`);
 }
 
 function lanUrls(scheme: string): string[] {

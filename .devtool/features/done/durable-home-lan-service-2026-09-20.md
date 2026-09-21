@@ -13,4 +13,4 @@ order: "a0"
 
 # Durable home LAN service
 
-The API can serve `dist` on the LAN (optional mkcert HTTPS). `scripts/home-serve.ps1` builds and starts it; `scripts/install-home-task.ps1` registers a logon restart task.
+The API can serve `apps/web/dist` on the LAN (optional mkcert HTTPS). `scripts/home-serve.ps1` builds and starts it; `scripts/install-home-task.ps1` registers a logon restart task.

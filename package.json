@@ -15,6 +15,7 @@
     "home:serve": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/home-serve.ps1",
     "home:install": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-home-task.ps1",
     "home:uninstall": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/uninstall-home-task.ps1",
+    "vercel-build": "node scripts/vercel-build.mjs",
     "build": "npm run build --workspaces --if-present",
     "lint": "oxlint .",
     "typecheck": "npm run typecheck --workspaces --if-present",

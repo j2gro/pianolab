@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "npm install --include=dev",
-  "buildCommand": "npm run build --workspace=@pianolab/web",
+  "buildCommand": "npm run vercel-build",
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }

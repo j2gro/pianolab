@@ -39,7 +39,7 @@ Set `DATABASE_URL` in `.env` if you want this PC to share accounts and progress 
 Public HTTPS URL for the trainer. The Vite app is static; auth and progress go through one Node function to a free Neon database.
 
 1. Create a project at [neon.tech](https://neon.tech) (free tier). Copy the connection string (`DATABASE_URL`).
-2. In [Vercel](https://vercel.com), import this repo. Framework preset **Other**, root directory `.`, Output Directory **`dist`**. Hobby is personal/non-commercial only.
+2. In [Vercel](https://vercel.com), import this repo. Framework preset **Other**, root directory **`.`** (not `apps/web`). In Build & Development Settings, turn **off** the Output Directory override so `vercel.json` can set `dist`. Hobby is personal/non-commercial only.
 3. Project environment variables:
    - `DATABASE_URL` — Neon URI
    - `SESSION_SECRET` — long random string (not the POC default)
