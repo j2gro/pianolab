@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "typecheck": "tsc -b",
+    "test": "tsx --test src/piano/layout.test.ts",
     "vercel-build": "node ../../scripts/bundle-api.mjs && vite build"
   },
   "dependencies": {

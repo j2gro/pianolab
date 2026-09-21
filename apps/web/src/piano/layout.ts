@@ -32,14 +32,29 @@ export function keyboardWidth(): number {
   return whiteKeyCount() * WHITE_WIDTH;
 }
 
+/**
+ * World X for a MIDI key.
+ *
+ * The top-down camera looks down −Y with +Z as screen-up, so camera +X is
+ * world −X and world +X appears on the left of the screen. Placing lower
+ * pitches at +X keeps bass on the player's left, like a real piano.
+ *
+ * Black keys sit in the gap between the surrounding whites (not mirrored onto
+ * the previous white).
+ */
 export function keyX(midi: number): number {
   const clamped = Math.min(HIGHEST_MIDI, Math.max(LOWEST_MIDI, midi));
   const width = keyboardWidth();
   const whites = whiteIndex(clamped);
   const local = isBlackKey(clamped)
-    ? whites * WHITE_WIDTH - WHITE_WIDTH * 0.5
+    ? whites * WHITE_WIDTH
     : whites * WHITE_WIDTH + WHITE_WIDTH * 0.5;
-  return local - width / 2;
+  return width / 2 - local;
+}
+
+/** Left-to-right screen X after the top-down camera's X flip (low pitch = left). */
+export function keyScreenX(midi: number): number {
+  return -keyX(midi);
 }
 
 const SHARP_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];

@@ -222,6 +222,8 @@ function CameraRig() {
     cam.position.set(0, 18, LOOK_Z);
     cam.up.set(0, 0, 1);
     cam.lookAt(0, 0, LOOK_Z);
+    // lookAt down −Y with +Z up makes camera +X = world −X. keyX accounts for that
+    // so bass stays on screen left. Do not negate cam.left/right here (winding).
     const halfW = keyboardWidth() * 0.52;
     const height = (halfW * 2) / Math.min(aspect, 1.22);
     const keyboardScreenY = KEY_BOTTOM_Z - LOOK_Z;
