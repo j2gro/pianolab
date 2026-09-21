@@ -20,7 +20,17 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     headers.set("authorization", `Bearer ${token}`);
   }
   const res = await fetch(`/api${path}`, { ...init, headers });
-  const data = (await res.json()) as T & { error?: string };
+  const raw = await res.text();
+  let data: T & { error?: string };
+  try {
+    data = JSON.parse(raw) as T & { error?: string };
+  } catch {
+    throw new Error(
+      raw.startsWith("<") || raw.startsWith("The page")
+        ? "API route is not deployed. Check /api/health on this host."
+        : raw.slice(0, 180),
+    );
+  }
   if (!res.ok) {
     throw new Error(data.error ?? `request_failed_${res.status}`);
   }

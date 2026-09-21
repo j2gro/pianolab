@@ -12,6 +12,7 @@
     "vercel-build": "vite build"
   },
   "dependencies": {
+    "@pianolab/api": "*",
     "@pianolab/lesson-schema": "*",
     "@pianolab/engine": "*",
     "@react-three/fiber": "9.4.0",

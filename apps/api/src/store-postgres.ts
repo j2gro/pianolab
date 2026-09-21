@@ -2,6 +2,16 @@ import { neon } from "@neondatabase/serverless";
 import type { LessonProgress } from "@pianolab/lesson-schema";
 import type { DataStore, UserRecord } from "./store";
 
+function withoutChannelBinding(databaseUrl: string): string {
+  try {
+    const parsed = new URL(databaseUrl);
+    parsed.searchParams.delete("channel_binding");
+    return parsed.toString();
+  } catch {
+    return databaseUrl;
+  }
+}
+
 function isUniqueViolation(error: unknown): boolean {
   const code =
     typeof error === "object" && error !== null && "code" in error
@@ -22,7 +32,7 @@ function asProgress(value: unknown): LessonProgress | null {
 }
 
 export function createPostgresStore(databaseUrl: string): DataStore {
-  const sql = neon(databaseUrl);
+  const sql = neon(withoutChannelBinding(databaseUrl));
   let ready: Promise<void> | null = null;
 
   const boot = (): Promise<void> => {

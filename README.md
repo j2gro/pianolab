@@ -41,7 +41,7 @@ Public HTTPS URL for the trainer. The Vite app is static; auth and progress go t
 1. Create a project at [neon.tech](https://neon.tech) (free tier). Copy the connection string (`DATABASE_URL`).
 2. In [Vercel](https://vercel.com), import this repo. Set **Root Directory** to `apps/web` (this matches the current Hobby project). Framework **Other**. Output Directory `dist`. Hobby is personal/non-commercial only.
 3. Project environment variables:
-   - `DATABASE_URL` — Neon URI
+   - `DATABASE_URL` — Neon **pooled** URI (`…-pooler…`, `sslmode=require` is enough)
    - `SESSION_SECRET` — long random string (not the POC default)
 4. Deploy. Open `https://<project>.vercel.app`. Tables are created on first API request (`apps/api/schema.sql` is the same DDL).
 
