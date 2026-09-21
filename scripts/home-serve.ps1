@@ -79,7 +79,7 @@ if ($useTls -and ($RenewCerts -or -not (Test-Path $cert) -or -not (Test-Path $ke
   }
 }
 
-$env:STATIC_DIR = "apps/web/dist"
+$env:STATIC_DIR = "dist"
 $env:HOST = "0.0.0.0"
 
 if ($useTls -and (Test-Path $cert) -and (Test-Path $key)) {

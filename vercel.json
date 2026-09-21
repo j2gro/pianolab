@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "npm install",
-  "buildCommand": "npm run build -w @pianolab/web && mkdir -p dist && cp -a apps/web/dist/. dist/",
+  "installCommand": "npm install --include=dev",
+  "buildCommand": "npm run build --workspace=@pianolab/web",
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }

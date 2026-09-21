@@ -30,4 +30,8 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    outDir: path.resolve(webRoot, "../../dist"),
+    emptyOutDir: true,
+  },
 });
