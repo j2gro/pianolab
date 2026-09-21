@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "@types/node": "^24.13.3",
     "@pianolab/api": "*",
     "@pianolab/lesson-schema": "*",
     "@pianolab/engine": "*",
@@ -22,7 +23,6 @@
     "three": "^0.180.0"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@types/three": "^0.180.0",
