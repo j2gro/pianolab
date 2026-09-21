@@ -33,6 +33,8 @@ export type TransportOptions = {
   tempo: number;
   mode: PracticeMode;
   now: () => number;
+  /** Seconds of musical time before beat 0. Default 0. */
+  leadInSec?: number;
   centsTolerance?: number;
   earlyMs?: number;
   lateMs?: number;

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   FULL_SONG_ID,
-  twinkleLesson,
+  lessons,
   type LessonProgress,
 } from "@pianolab/lesson-schema";
 import type { PracticeMode } from "@pianolab/engine";
@@ -11,8 +11,13 @@ import { PracticeView } from "./views/PracticeView";
 
 type Screen = "auth" | "practice";
 
+function lessonById(id: string) {
+  return lessons.find((item) => item.id === id) ?? lessons[0]!;
+}
+
 function App() {
-  const lesson = twinkleLesson;
+  const [lessonId, setLessonId] = useState(lessons[0]!.id);
+  const lesson = lessonById(lessonId);
   const [screen, setScreen] = useState<Screen>(getToken() ? "practice" : "auth");
   const [email, setEmail] = useState<string>("");
   const [progress, setProgress] = useState<LessonProgress | null>(null);
@@ -21,10 +26,15 @@ function App() {
   const [tempo, setTempo] = useState(lesson.defaultTempo);
   const [bootError, setBootError] = useState<string | null>(null);
 
-  const applyProgress = (next: LessonProgress | null) => {
+  const applyProgress = (nextLessonId: string, next: LessonProgress | null) => {
     setProgress(next);
-    if (next?.tempo) {
-      setTempo(next.tempo);
+    const catalog = lessonById(nextLessonId);
+    setTempo(next?.tempo ?? catalog.defaultTempo);
+    const last = next?.lastPhraseId;
+    if (last && (last === FULL_SONG_ID || catalog.phrases.some((phrase) => phrase.id === last))) {
+      setPhraseId(last);
+    } else {
+      setPhraseId(FULL_SONG_ID);
     }
   };
 
@@ -36,8 +46,8 @@ function App() {
       try {
         const profile = await me();
         setEmail(profile.email);
-        const result = await getProgress(lesson.id);
-        applyProgress(result.progress);
+        const result = await getProgress(lessonId);
+        applyProgress(lessonId, result.progress);
         setScreen("practice");
       } catch {
         setToken(null);
@@ -45,7 +55,7 @@ function App() {
         setBootError("Session expired. Sign in again.");
       }
     })();
-  }, [lesson.id]);
+  }, []);
 
   const persist = (next: LessonProgress) => {
     setProgress(next);
@@ -74,8 +84,7 @@ function App() {
             setEmail(nextEmail);
             setBootError(null);
             void getProgress(lesson.id).then((result) => {
-              applyProgress(result.progress);
-              setPhraseId(FULL_SONG_ID);
+              applyProgress(lesson.id, result.progress);
               setMode("wait");
               setScreen("practice");
             });
@@ -84,13 +93,21 @@ function App() {
       ) : null}
       {screen === "practice" ? (
         <PracticeView
-          key={phraseId}
+          key={`${lesson.id}:${phraseId}`}
           lesson={lesson}
+          lessons={lessons}
           progressCompleted={completed}
           email={email}
           phraseId={phraseId}
           mode={mode}
           tempo={tempo}
+          onLesson={(id) => {
+            setLessonId(id);
+            setProgress(null);
+            void getProgress(id).then((result) => {
+              applyProgress(id, result.progress);
+            });
+          }}
           onPhrase={(id) => {
             setPhraseId(id);
             saveSession(id, tempo);

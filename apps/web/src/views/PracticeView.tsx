@@ -2,15 +2,20 @@ import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import {
   createTransport,
   isPitchHit,
+  PLAY_ALONG_COUNT_IN_SEC,
+  playAlongCountDigit,
+  playAlongLeadInSec,
   type DetectedNote,
   type PracticeMode,
   type Transport,
   type TransportSnapshot,
 } from "@pianolab/engine";
 import {
+  DIFFICULTY_LABEL,
   FULL_SONG_ID,
   notesForScope,
   remapPhraseToZero,
+  type Difficulty,
   type Lesson,
   type LessonNote,
 } from "@pianolab/lesson-schema";
@@ -21,7 +26,7 @@ import { createPianoSynth } from "../audio/synth";
 import { midiName } from "../piano/layout";
 import { ErrorBoundary } from "../ErrorBoundary";
 import type { KeyLight } from "../piano/PianoScene";
-import { rollClearedKeyboard } from "../piano/roll";
+import { midisAtHitLine, rollClearedKeyboard } from "../piano/roll";
 
 const PianoScene = lazy(async () => {
   const mod = await import("../piano/PianoScene");
@@ -30,11 +35,13 @@ const PianoScene = lazy(async () => {
 
 type Props = {
   lesson: Lesson;
+  lessons: Lesson[];
   progressCompleted: string[];
   email: string;
   phraseId: string;
   mode: PracticeMode;
   tempo: number;
+  onLesson: (id: string) => void;
   onPhrase: (id: string) => void;
   onMode: (mode: PracticeMode) => void;
   onTempo: (tempo: number) => void;
@@ -42,17 +49,52 @@ type Props = {
   onComplete: (stats: { hits: number; wrongs: number; waitsMs: number[] }) => void;
 };
 
+const DIFFICULTY_ORDER: Difficulty[] = ["beginner", "intermediate", "advanced"];
+
 const MODES: { id: PracticeMode; label: string }[] = [
   { id: "listen", label: "Listen" },
   { id: "play-along", label: "Play along" },
   { id: "wait", label: "Practice" },
 ];
 
-function emptySnapshot(notes: LessonNote[]): TransportSnapshot {
+const DEFAULT_LEAD_IN_SEC = 2;
+
+function leadInSecFor(mode: PracticeMode, tempo: number): number {
+  if (mode === "play-along") {
+    return playAlongLeadInSec(tempo);
+  }
+  return DEFAULT_LEAD_IN_SEC;
+}
+
+function durationSec(notes: LessonNote[], tempo: number): number {
+  let end = 0;
+  for (const note of notes) {
+    end = Math.max(end, ((note.beat + note.durationBeats) * 60) / Math.max(1, tempo));
+  }
+  return Math.max(end, 0.01);
+}
+
+function formatPlayTime(sec: number): string {
+  const total = Math.max(0, Math.floor(sec + 1e-9));
+  const minutes = Math.floor(total / 60);
+  const seconds = total % 60;
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+function notesSoundingAt(notes: LessonNote[], timeSec: number, tempo: number): LessonNote[] {
+  return notes.filter((note) => {
+    const attack = (note.beat * 60) / Math.max(1, tempo);
+    const end = attack + (note.durationBeats * 60) / Math.max(1, tempo);
+    return timeSec + 1e-9 >= attack && timeSec < end;
+  });
+}
+
+function emptySnapshot(notes: LessonNote[], tempo: number, mode: PracticeMode): TransportSnapshot {
   const states = Object.fromEntries(notes.map((note) => [note.id, "upcoming" as const]));
+  const timeSec = -leadInSecFor(mode, tempo);
   return {
-    timeSec: 0,
-    beat: 0,
+    timeSec,
+    beat: (timeSec * tempo) / 60,
     running: false,
     waiting: false,
     complete: false,
@@ -107,11 +149,13 @@ function replayChoiceFromKey(key: string): PracticeMode | "same" | null {
 
 export function PracticeView({
   lesson,
+  lessons,
   progressCompleted,
   email,
   phraseId,
   mode,
   tempo,
+  onLesson,
   onPhrase,
   onMode,
   onTempo,
@@ -122,13 +166,15 @@ export function PracticeView({
     () => remapPhraseToZero(notesForScope(lesson, phraseId)),
     [lesson, phraseId],
   );
-  const [snapshot, setSnapshot] = useState(() => emptySnapshot(notes));
+  const [snapshot, setSnapshot] = useState(() => emptySnapshot(notes, tempo, mode));
   const [started, setStarted] = useState(false);
   const [heard, setHeard] = useState("Mic off — press Start");
   const [micError, setMicError] = useState<string | null>(null);
   const [status, setStatus] = useState("Press Start, then play or sing the highlighted note.");
   const [complete, setComplete] = useState(false);
-  const [presses, setPresses] = useState<{ midi: number; ok: boolean; until: number }[]>([]);
+  const [presses, setPresses] = useState<{ midi: number; ok: boolean; until: number; motionUntil: number }[]>([]);
+  const [heldMidis, setHeldMidis] = useState<number[]>([]);
+  const heldRef = useRef(new Set<number>());
   const [phraseOpen, setPhraseOpen] = useState(false);
   const scoredRef = useRef(false);
   const completeRef = useRef(false);
@@ -142,12 +188,29 @@ export function PracticeView({
   const currentNoteIdRef = useRef<string | null>(notes[0]?.id ?? null);
   const detectRef = useRef<(note: DetectedNote) => void>(() => {});
   const nowRef = useRef<() => number>(() => 0);
+  const tempoRef = useRef(tempo);
   const playAgainRef = useRef<(next?: PracticeMode) => Promise<void>>(async () => {});
   const phraseMenuRef = useRef<HTMLDivElement>(null);
   const done = new Set(progressCompleted);
   const title = scopeTitle(lesson, phraseId);
+  tempoRef.current = tempo;
   modeRef.current = mode;
   completeRef.current = complete;
+
+  const holdMidi = (midi: number) => {
+    if (heldRef.current.has(midi)) {
+      return;
+    }
+    heldRef.current.add(midi);
+    setHeldMidis([...heldRef.current]);
+  };
+
+  const releaseMidi = (midi: number) => {
+    if (!heldRef.current.delete(midi)) {
+      return;
+    }
+    setHeldMidis([...heldRef.current]);
+  };
 
   const playInput = (note: DetectedNote, source: "mic" | "keys" = "keys") => {
     if (completeRef.current) {
@@ -162,6 +225,18 @@ export function PracticeView({
   };
 
   const start = async (sessionMode: PracticeMode = modeRef.current) => {
+    setSnapshot({ ...emptySnapshot(notes, tempoRef.current, sessionMode), running: true });
+    setStarted(true);
+    setComplete(false);
+    completeRef.current = false;
+    micReplayReadyRef.current = false;
+    scoredRef.current = false;
+    if (sessionMode === "play-along") {
+      setStatus(`Get ready · ${PLAY_ALONG_COUNT_IN_SEC}`);
+    } else {
+      setStatus("Get ready");
+    }
+
     const ctx = new AudioContext({ latencyHint: "interactive" });
     await ctx.resume();
     const synth = createPianoSynth(ctx);
@@ -170,15 +245,12 @@ export function PracticeView({
       tempo,
       mode: sessionMode,
       now: () => ctx.currentTime,
+      leadInSec: leadInSecFor(sessionMode, tempo),
     });
     transport.start();
+    setSnapshot(transport.tick());
     transportRef.current = transport;
     synthRef.current = synth;
-    setStarted(true);
-    setComplete(false);
-    completeRef.current = false;
-    micReplayReadyRef.current = false;
-    scoredRef.current = false;
 
     const onHearing = (frame: MicHearing) => {
       const nowMs = performance.now();
@@ -202,9 +274,13 @@ export function PracticeView({
       const current = notes.find((item) => item.id === currentNoteIdRef.current);
       const ok = current ? isPitchHit(current.midi, note, 50) : false;
       const until = performance.now() + 1400;
+      const motionUntil = performance.now() + 280;
       setPresses((prev) => {
         const nowMs = performance.now();
-        return [...prev.filter((press) => press.midi !== note.midi && press.until > nowMs), { midi: note.midi, ok, until }];
+        return [
+          ...prev.filter((press) => press.midi !== note.midi && press.until > nowMs),
+          { midi: note.midi, ok, until, motionUntil },
+        ];
       });
       setHeard(ok ? `Played ${midiName(note.midi)} — correct` : `Played ${midiName(note.midi)} — wrong`);
       transport.reportDetected(note);
@@ -291,13 +367,20 @@ export function PracticeView({
         for (const id of snap.attacksThisTick) {
           const note = notes.find((item) => item.id === id);
           if (note) {
-            synth.play(note.midi, (note.durationBeats * 60) / tempo);
+            synth.play(note.midi, (note.durationBeats * 60) / tempoRef.current);
           }
         }
       }
       setSnapshot(snap);
       const current = notes.find((item) => item.id === snap.currentNoteId);
-      if (current && !scoredRef.current) {
+      if (!snap.running && !snap.complete && !scoredRef.current) {
+        setStatus("Paused");
+      } else if (snap.timeSec < 0 && !scoredRef.current) {
+        const remain = playAlongCountDigit(snap.timeSec, tempoRef.current);
+        setStatus(
+          modeRef.current === "play-along" && remain !== null ? `Get ready · ${remain}` : "Get ready",
+        );
+      } else if (current && !scoredRef.current) {
         setStatus(
           snap.waiting
             ? `Waiting for ${midiName(current.midi)}${current.lyric ? ` (${current.lyric})` : ""}`
@@ -308,6 +391,11 @@ export function PracticeView({
         scoredRef.current = true;
         onComplete(transport.stats());
         setStatus(phraseId === FULL_SONG_ID ? "Song complete." : "Phrase complete.");
+      }
+      if (!snap.complete && (completeRef.current || scoredRef.current)) {
+        completeRef.current = false;
+        scoredRef.current = false;
+        setComplete(false);
       }
       if (snap.complete && rollClearedKeyboard(notes, snap.beat) && !completeRef.current) {
         completeRef.current = true;
@@ -321,8 +409,22 @@ export function PracticeView({
     };
     raf = requestAnimationFrame(loop);
 
-    stopKeys = startComputerKeyboard(() => nowRef.current(), (note) => playInput(note, "keys"));
-    void startMidiAdapter(() => nowRef.current(), (note) => playInput(note, "keys")).then((stop) => {
+    stopKeys = startComputerKeyboard(
+      () => nowRef.current(),
+      (note) => {
+        holdMidi(note.midi);
+        playInput(note, "keys");
+      },
+      releaseMidi,
+    );
+    void startMidiAdapter(
+      () => nowRef.current(),
+      (note) => {
+        holdMidi(note.midi);
+        playInput(note, "keys");
+      },
+      releaseMidi,
+    ).then((stop) => {
       stopMidi = stop;
     });
 
@@ -340,6 +442,8 @@ export function PracticeView({
       stopMic();
       transportRef.current = null;
       synthRef.current = null;
+      heldRef.current.clear();
+      setHeldMidis([]);
       void ctx.close();
     };
     cleanupRef.current = cleanup;
@@ -357,8 +461,10 @@ export function PracticeView({
     scoredRef.current = false;
     completeRef.current = false;
     setComplete(false);
-    setSnapshot(emptySnapshot(notes));
+    setSnapshot(emptySnapshot(notes, tempoRef.current, nextMode));
     setPresses([]);
+    heldRef.current.clear();
+    setHeldMidis([]);
     currentNoteIdRef.current = notes[0]?.id ?? null;
     try {
       await start(nextMode);
@@ -370,26 +476,50 @@ export function PracticeView({
 
   const keyLights = useMemo(() => {
     const lights: Record<number, KeyLight> = {};
+    for (const midi of midisAtHitLine(notes, snapshot.beat)) {
+      lights[midi] = "expected";
+    }
     const current = notes.find((item) => item.id === snapshot.currentNoteId);
     const currentState = current ? snapshot.states[current.id] : undefined;
     if (
       current &&
       (currentState === "due" || currentState === "waiting" || currentState === "wrong" || !started)
     ) {
-      lights[current.midi] = "expected";
+      lights[current.midi] ??= "expected";
     }
     const nowMs = performance.now();
     for (const press of presses) {
-      if (press.until > nowMs) {
-        lights[press.midi] = press.ok ? "correct" : "wrong";
+      if (press.until > nowMs && !press.ok) {
+        lights[press.midi] = "wrong";
       }
     }
     return lights;
-  }, [notes, presses, snapshot.currentNoteId, snapshot.states, started]);
+  }, [notes, presses, snapshot.beat, snapshot.currentNoteId, snapshot.states, started]);
+
+  const pressedMidis = useMemo(() => {
+    const active = new Set(heldMidis);
+    const nowMs = performance.now();
+    for (const press of presses) {
+      if (press.motionUntil > nowMs) {
+        active.add(press.midi);
+      }
+    }
+    for (const midi of midisAtHitLine(notes, snapshot.beat)) {
+      active.add(midi);
+    }
+    return [...active];
+  }, [heldMidis, notes, presses, snapshot.beat]);
 
   useEffect(() => {
     return () => cleanupRef.current();
   }, []);
+
+  useEffect(() => {
+    if (started) {
+      return;
+    }
+    setSnapshot(emptySnapshot(notes, tempo, mode));
+  }, [mode, notes, started, tempo]);
 
   useEffect(() => {
     if (!started) {
@@ -399,8 +529,19 @@ export function PracticeView({
     if (mode !== "listen") {
       synthRef.current?.stopAll();
     }
+    if (mode === "wait") {
+      const transport = transportRef.current;
+      const snap = transport?.tick();
+      if (transport && snap && !snap.running && !snap.complete) {
+        transport.start();
+      }
+    }
     syncMicRef.current();
   }, [complete, mode, started]);
+
+  useEffect(() => {
+    transportRef.current?.setTempo(tempo);
+  }, [tempo]);
 
   useEffect(() => {
     if (!phraseOpen) {
@@ -431,6 +572,80 @@ export function PracticeView({
     }
   };
 
+  const canPause = started && !complete && (mode === "listen" || mode === "play-along");
+  const countIn =
+    started && !complete && mode === "play-along"
+      ? playAlongCountDigit(snapshot.timeSec, tempo)
+      : null;
+
+  const togglePause = () => {
+    const transport = transportRef.current;
+    if (!transport || completeRef.current) {
+      return;
+    }
+    if (modeRef.current !== "listen" && modeRef.current !== "play-along") {
+      return;
+    }
+    const snap = transport.tick();
+    if (snap.running) {
+      transport.pause();
+      synthRef.current?.stopAll();
+    } else {
+      transport.start();
+    }
+  };
+
+  const restartPlayback = () => {
+    const transport = transportRef.current;
+    if (!transport) {
+      return;
+    }
+    synthRef.current?.stopAll();
+    scoredRef.current = false;
+    completeRef.current = false;
+    micReplayReadyRef.current = false;
+    setComplete(false);
+    setPresses([]);
+    transport.restart();
+    const snap = transport.tick();
+    currentNoteIdRef.current = snap.currentNoteId;
+    setSnapshot(snap);
+    if (modeRef.current === "play-along") {
+      setStatus(`Get ready · ${PLAY_ALONG_COUNT_IN_SEC}`);
+    } else {
+      setStatus("Get ready");
+    }
+  };
+
+  const seekPlayback = (timeSec: number) => {
+    const transport = transportRef.current;
+    if (!transport) {
+      return;
+    }
+    synthRef.current?.stopAll();
+    transport.seek(timeSec);
+    const snap = transport.tick();
+    currentNoteIdRef.current = snap.currentNoteId;
+    if (!snap.complete) {
+      completeRef.current = false;
+      scoredRef.current = false;
+      setComplete(false);
+    }
+    if (modeRef.current === "listen" && snap.running) {
+      const synth = synthRef.current;
+      const remain = Math.max(0.05, durationSec(notes, tempoRef.current) - snap.timeSec);
+      for (const note of notesSoundingAt(notes, snap.timeSec, tempoRef.current)) {
+        const attack = (note.beat * 60) / tempoRef.current;
+        const leftover = attack + (note.durationBeats * 60) / tempoRef.current - snap.timeSec;
+        synth?.play(note.midi, Math.min(remain, Math.max(0.05, leftover)));
+      }
+    }
+    setSnapshot(snap);
+  };
+
+  const songDuration = durationSec(notes, tempo);
+  const sliderTime = Math.min(songDuration, Math.max(0, snapshot.timeSec));
+
   return (
     <div className="practice">
       <div className="hud">
@@ -439,56 +654,95 @@ export function PracticeView({
             Sign out
           </button>
           <div>
-            <strong>{lesson.title}</strong>
-            <span>
-              {email} · {tempo} BPM
-            </span>
+            <label className="song-picker">
+              <span className="sr-only">Song</span>
+              <select
+                aria-label="Song"
+                value={lesson.id}
+                onChange={(event) => onLesson(event.target.value)}
+              >
+                {DIFFICULTY_ORDER.map((level) => {
+                  const items = lessons.filter((item) => item.difficulty === level);
+                  if (items.length === 0) {
+                    return null;
+                  }
+                  return (
+                    <optgroup key={level} label={DIFFICULTY_LABEL[level]}>
+                      {items.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.title}
+                        </option>
+                      ))}
+                    </optgroup>
+                  );
+                })}
+              </select>
+            </label>
+            <span>{email}</span>
           </div>
         </div>
-        <div className="mode-toggle" role="radiogroup" aria-label="Practice mode">
-          {MODES.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              role="radio"
-              aria-checked={mode === item.id}
-              className={mode === item.id ? "selected" : ""}
-              onClick={() => onMode(item.id)}
-            >
-              {item.label}
+        <div className="hud-pills">
+          <div className="mode-toggle" role="radiogroup" aria-label="Practice mode">
+            {MODES.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                role="radio"
+                aria-checked={mode === item.id}
+                className={mode === item.id ? "selected" : ""}
+                onClick={() => onMode(item.id)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+          <label className="tempo-pill">
+            <span>Tempo {tempo}</span>
+            <input
+              type="range"
+              min={50}
+              max={140}
+              value={tempo}
+              aria-label="Tempo in BPM"
+              onChange={(e) => onTempo(Number(e.target.value))}
+            />
+          </label>
+          <label className="tempo-pill seek-pill">
+            <span>
+              {formatPlayTime(sliderTime)} / {formatPlayTime(songDuration)}
+            </span>
+            <input
+              type="range"
+              min={0}
+              max={songDuration}
+              step={0.05}
+              value={sliderTime}
+              disabled={!started}
+              aria-label="Playback time"
+              aria-valuetext={formatPlayTime(sliderTime)}
+              onChange={(e) => seekPlayback(Number(e.target.value))}
+            />
+          </label>
+          {!started ? (
+            <button type="button" onClick={() => void start()}>
+              Start
             </button>
-          ))}
+          ) : canPause ? (
+            <button type="button" className="secondary" onClick={togglePause}>
+              {snapshot.running ? "Pause" : "Resume"}
+            </button>
+          ) : (
+            <span className="pill">
+              {complete ? "complete" : snapshot.waiting ? "waiting" : snapshot.running ? "playing" : "idle"}
+            </span>
+          )}
+          {started ? (
+            <button type="button" className="secondary" onClick={restartPlayback}>
+              Restart
+            </button>
+          ) : null}
         </div>
-        {!started ? (
-          <button type="button" onClick={() => void start()}>
-            Start
-          </button>
-        ) : (
-          <span className="pill">
-            {complete ? "complete" : snapshot.waiting ? "waiting" : snapshot.running ? "playing" : "idle"}
-          </span>
-        )}
       </div>
-      <p className="status">{status}</p>
-      {micError ? (
-        <p className="hint">{micError}</p>
-      ) : complete ? (
-        <p className="hint">{heard}. Play C, D, or E to choose a mode, or any other note to repeat.</p>
-      ) : mode === "listen" ? (
-        <p className="hint">Listen mode does not use the mic until the song ends. Switch to Practice to play along.</p>
-      ) : (
-        <p className="hint">{heard}. Any octave of the expected note counts. Keys A–K also work.</p>
-      )}
-      <label className="tempo-inline">
-        Tempo {tempo} BPM
-        <input
-          type="range"
-          min={50}
-          max={140}
-          value={tempo}
-          onChange={(e) => onTempo(Number(e.target.value))}
-        />
-      </label>
       <div className="scene">
         <div className="scene-fill">
           <ErrorBoundary>
@@ -497,10 +751,27 @@ export function PracticeView({
                 notes={notes}
                 snapshot={snapshot}
                 keyLights={keyLights}
-                onPlayKey={(midi) => playInput({ midi, cents: 0, t: nowRef.current() }, "keys")}
+                pressedMidis={pressedMidis}
+                onPlayKey={(midi) => {
+                  holdMidi(midi);
+                  playInput({ midi, cents: 0, t: nowRef.current() }, "keys");
+                }}
+                onReleaseKey={releaseMidi}
               />
             </Suspense>
           </ErrorBoundary>
+        </div>
+        <div className="scene-caption">
+          <p className="status">{status}</p>
+          {micError ? (
+            <p className="hint">{micError}</p>
+          ) : complete ? (
+            <p className="hint">{heard}. Play C, D, or E to choose a mode, or any other note to repeat.</p>
+          ) : mode === "listen" ? (
+            <p className="hint">Listen mode does not use the mic until the song ends.</p>
+          ) : (
+            <p className="hint">{heard}</p>
+          )}
         </div>
         <div className="phrase-dock" ref={phraseMenuRef}>
           <button
@@ -542,6 +813,12 @@ export function PracticeView({
             </ul>
           ) : null}
         </div>
+        {countIn !== null ? (
+          <div className="count-in" role="status" aria-live="polite" aria-label={`Starting in ${countIn}`}>
+            <strong>{countIn}</strong>
+            <span>Get ready</span>
+          </div>
+        ) : null}
         {complete ? (
           <div className="replay-modal" role="dialog" aria-modal="true" aria-labelledby="replay-title">
             <h2 id="replay-title">{phraseId === FULL_SONG_ID ? "Song complete" : "Phrase complete"}</h2>

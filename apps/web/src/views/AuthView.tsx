@@ -27,7 +27,7 @@ export function AuthView({ onAuthed }: { onAuthed: (email: string) => void }) {
   return (
     <main className="panel">
       <h1>Pianolab</h1>
-      <p className="lede">Sign in to practice Twinkle. Progress is stored on the API, not as audio.</p>
+      <p className="lede">Sign in to practice. Progress is stored on the API, not as audio.</p>
       <form onSubmit={onSubmit} className="form">
         <label>
           Email

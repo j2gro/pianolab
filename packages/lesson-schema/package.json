@@ -11,10 +11,17 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/parse.test.ts"
+    "test": "tsx --test src/parse.test.ts src/midiToLesson.test.ts src/musicXmlToLesson.test.ts src/ingestMxl.test.ts",
+    "import-midi": "tsx src/import-midi.ts",
+    "ingest-mxl": "tsx src/ingest-mxl.ts"
   },
   "devDependencies": {
+    "@types/node": "^24.13.3",
     "tsx": "^4.20.5",
     "typescript": "~6.0.2"
+  },
+  "dependencies": {
+    "@tonejs/midi": "^2.0.28",
+    "fflate": "^0.8.3"
   }
 }

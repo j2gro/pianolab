@@ -36,12 +36,14 @@ export function createTransport(options: TransportOptions) {
 
   let tempo = options.tempo;
   let mode: PracticeMode = options.mode;
+  const leadInSec = Math.max(0, options.leadInSec ?? 0);
   let running = false;
   let startedAt = 0;
   let pauseAccum = 0;
   let userPausedAt: number | null = null;
   let lastTickSec = 0;
   let waitStartedAt: number | null = null;
+  let waitFreezeSec: number | null = null;
   const waitDurationsMs: number[] = [];
   let hits = 0;
   let wrongs = 0;
@@ -66,12 +68,12 @@ export function createTransport(options: TransportOptions) {
     }
     const t = now();
     if (userPausedAt !== null) {
-      return Math.max(0, userPausedAt - startedAt - pauseAccum);
+      return userPausedAt - startedAt - pauseAccum;
     }
     if (!running) {
       return lastTickSec;
     }
-    return Math.max(0, t - startedAt - pauseAccum);
+    return t - startedAt - pauseAccum;
   }
 
   function currentUnresolved(): LessonNote | undefined {
@@ -92,14 +94,75 @@ export function createTransport(options: TransportOptions) {
     }
     const current = currentUnresolved();
     if (!current) {
+      waitFreezeSec = null;
       return { timeSec: rawSec, waiting: false };
     }
     const attack = beatToSec(current.beat, tempo);
-    if (rawSec > attack) {
-      pauseAccum += rawSec - attack;
-      return { timeSec: attack, waiting: true };
+    if (rawSec >= attack) {
+      const freezeAt =
+        waitFreezeSec !== null && waitFreezeSec >= attack ? waitFreezeSec : attack;
+      if (rawSec > freezeAt) {
+        pauseAccum += rawSec - freezeAt;
+      }
+      return { timeSec: freezeAt, waiting: true };
     }
-    return { timeSec: rawSec, waiting: rawSec === attack && states[current.id] !== "hit" };
+    waitFreezeSec = null;
+    return { timeSec: rawSec, waiting: false };
+  }
+
+  function setMusicalTime(timeSec: number): void {
+    const t = now();
+    if (userPausedAt !== null) {
+      pauseAccum = userPausedAt - startedAt - timeSec;
+    } else if (running) {
+      pauseAccum = t - startedAt - timeSec;
+    } else {
+      startedAt = t - timeSec;
+      pauseAccum = 0;
+    }
+    lastTickSec = timeSec;
+  }
+
+  function rebuildStatesFromTime(timeSec: number): void {
+    pendingAttacks = [];
+    for (const id of Object.keys(wrongUntil)) {
+      delete wrongUntil[id];
+    }
+    const earlySec = earlyMs / 1000;
+    const lateSec = lateMs / 1000;
+    for (const note of notes) {
+      const attack = beatToSec(note.beat, tempo);
+      const end = attack + beatToSec(note.durationBeats, tempo);
+      if (mode === "wait") {
+        if (end <= timeSec) {
+          states[note.id] = "hit";
+        } else if (timeSec >= attack) {
+          states[note.id] = "waiting";
+        } else if (timeSec >= attack - earlySec) {
+          states[note.id] = "due";
+        } else {
+          states[note.id] = "upcoming";
+        }
+        continue;
+      }
+      if (mode === "listen") {
+        if (timeSec >= attack) {
+          states[note.id] = "hit";
+        } else if (timeSec >= attack - earlySec) {
+          states[note.id] = "due";
+        } else {
+          states[note.id] = "upcoming";
+        }
+        continue;
+      }
+      if (timeSec > attack + lateSec) {
+        states[note.id] = "missed";
+      } else if (timeSec >= attack - earlySec) {
+        states[note.id] = "due";
+      } else {
+        states[note.id] = "upcoming";
+      }
+    }
   }
 
   function setDueWindows(timeSec: number): void {
@@ -249,6 +312,7 @@ export function createTransport(options: TransportOptions) {
           waitStartedAt = null;
         }
         stablePc = null;
+        waitFreezeSec = null;
       } else {
         wrongUntil[current.id] = now() + wrongFlashMs / 1000;
         states[current.id] = "waiting";
@@ -280,9 +344,9 @@ export function createTransport(options: TransportOptions) {
         running = true;
         return;
       }
-      startedAt = t;
+      startedAt = t + leadInSec;
       pauseAccum = 0;
-      lastTickSec = -1;
+      lastTickSec = -leadInSec - 1e-6;
       running = true;
     },
     pause() {
@@ -293,8 +357,55 @@ export function createTransport(options: TransportOptions) {
       userPausedAt = now();
       running = false;
     },
+    restart() {
+      for (const note of notes) {
+        states[note.id] = "upcoming";
+        delete wrongUntil[note.id];
+      }
+      hits = 0;
+      wrongs = 0;
+      waitDurationsMs.length = 0;
+      waitStartedAt = null;
+      waitFreezeSec = null;
+      pendingAttacks = [];
+      stablePc = null;
+      userPausedAt = null;
+      startedAt = now() + leadInSec;
+      pauseAccum = 0;
+      lastTickSec = -leadInSec - 1e-6;
+      running = true;
+    },
+    seek(timeSec: number) {
+      const next = Number.isFinite(timeSec) ? Math.max(0, timeSec) : 0;
+      rebuildStatesFromTime(next);
+      setMusicalTime(next);
+      const current = currentUnresolved();
+      const attack = current ? beatToSec(current.beat, tempo) : 0;
+      if (mode === "wait" && current && next >= attack) {
+        waitFreezeSec = next;
+        waitStartedAt = now();
+      } else {
+        waitFreezeSec = null;
+        waitStartedAt = null;
+      }
+    },
     setTempo(next: number) {
+      if (next <= 0 || next === tempo) {
+        return;
+      }
+      const raw = musicalTime();
+      const beat = (raw * tempo) / 60;
+      const prevBeat = (Math.max(0, lastTickSec) * tempo) / 60;
       tempo = next;
+      const newTimeSec = beatToSec(beat, tempo);
+      if (lastTickSec >= 0) {
+        lastTickSec = beatToSec(prevBeat, tempo);
+      }
+      if (userPausedAt !== null) {
+        pauseAccum = userPausedAt - startedAt - newTimeSec;
+      } else if (running) {
+        pauseAccum = now() - startedAt - newTimeSec;
+      }
     },
     setMode(next: PracticeMode) {
       if (next === mode) {
@@ -304,6 +415,7 @@ export function createTransport(options: TransportOptions) {
       const timeSec = lastTickSec;
       mode = next;
 
+      waitFreezeSec = null;
       if (next === "wait") {
         const current = soundingNote(timeSec) ?? currentUnresolved();
         if (!current) {

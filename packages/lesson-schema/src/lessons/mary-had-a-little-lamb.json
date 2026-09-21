@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "mary-had-a-little-lamb-c-major",
+  "title": "Mary Had a Little Lamb",
+  "composer": "Traditional",
+  "timeSignature": [4, 4],
+  "defaultTempo": 80,
+  "difficulty": "beginner",
+  "notes": [
+    { "id": "n01", "midi": 64, "beat": 0, "durationBeats": 1, "hand": "right", "finger": 3, "lyric": "Ma" },
+    { "id": "n02", "midi": 62, "beat": 1, "durationBeats": 1, "hand": "right", "finger": 2, "lyric": "ry" },
+    { "id": "n03", "midi": 60, "beat": 2, "durationBeats": 1, "hand": "right", "finger": 1, "lyric": "had" },
+    { "id": "n04", "midi": 62, "beat": 3, "durationBeats": 1, "hand": "right", "finger": 2, "lyric": "a" },
+    { "id": "n05", "midi": 64, "beat": 4, "durationBeats": 1, "hand": "right", "finger": 3, "lyric": "lit" },
+    { "id": "n06", "midi": 64, "beat": 5, "durationBeats": 1, "hand": "right", "finger": 3, "lyric": "tle" },
+    { "id": "n07", "midi": 64, "beat": 6, "durationBeats": 2, "hand": "right", "finger": 3, "lyric": "lamb" },
+    { "id": "n08", "midi": 62, "beat": 8, "durationBeats": 1, "hand": "right", "finger": 2, "lyric": "lit" },
+    { "id": "n09", "midi": 62, "beat": 9, "durationBeats": 1, "hand": "right", "finger": 2, "lyric": "tle" },
+    { "id": "n10", "midi": 62, "beat": 10, "durationBeats": 2, "hand": "right", "finger": 2, "lyric": "lamb" },
+    { "id": "n11", "midi": 64, "beat": 12, "durationBeats": 1, "hand": "right", "finger": 3, "lyric": "lit" },
+    { "id": "n12", "midi": 67, "beat": 13, "durationBeats": 1, "hand": "right", "finger": 5, "lyric": "tle" },
+    { "id": "n13", "midi": 67, "beat": 14, "durationBeats": 2, "hand": "right", "finger": 5, "lyric": "lamb" },
+    { "id": "n14", "midi": 64, "beat": 16, "durationBeats": 1, "hand": "right", "finger": 3, "lyric": "Ma" },
+    { "id": "n15", "midi": 62, "beat": 17, "durationBeats": 1, "hand": "right", "finger": 2, "lyric": "ry" },
+    { "id": "n16", "midi": 60, "beat": 18, "durationBeats": 1, "hand": "right", "finger": 1, "lyric": "had" },
+    { "id": "n17", "midi": 62, "beat": 19, "durationBeats": 1, "hand": "right", "finger": 2, "lyric": "a" },
+    { "id": "n18", "midi": 64, "beat": 20, "durationBeats": 1, "hand": "right", "finger": 3, "lyric": "lit" },
+    { "id": "n19", "midi": 64, "beat": 21, "durationBeats": 1, "hand": "right", "finger": 3, "lyric": "tle" },
+    { "id": "n20", "midi": 64, "beat": 22, "durationBeats": 2, "hand": "right", "finger": 3, "lyric": "lamb" },
+    { "id": "n21", "midi": 62, "beat": 24, "durationBeats": 1, "hand": "right", "finger": 2, "lyric": "its" },
+    { "id": "n22", "midi": 62, "beat": 25, "durationBeats": 1, "hand": "right", "finger": 2, "lyric": "fleece" },
+    { "id": "n23", "midi": 64, "beat": 26, "durationBeats": 1, "hand": "right", "finger": 3, "lyric": "was" },
+    { "id": "n24", "midi": 62, "beat": 27, "durationBeats": 1, "hand": "right", "finger": 2, "lyric": "white" },
+    { "id": "n25", "midi": 60, "beat": 28, "durationBeats": 4, "hand": "right", "finger": 1, "lyric": "snow" }
+  ],
+  "phrases": [
+    { "id": "p1", "title": "Mary had a little lamb", "noteIds": ["n01", "n02", "n03", "n04", "n05", "n06", "n07"] },
+    { "id": "p2", "title": "Little lamb", "noteIds": ["n08", "n09", "n10"] },
+    { "id": "p3", "title": "Little lamb (higher)", "noteIds": ["n11", "n12", "n13"] },
+    { "id": "p4", "title": "Mary (reprise)", "noteIds": ["n14", "n15", "n16", "n17", "n18", "n19", "n20"] },
+    { "id": "p5", "title": "Its fleece was white as snow", "noteIds": ["n21", "n22", "n23", "n24", "n25"] }
+  ]
+}

@@ -5,6 +5,7 @@
   "composer": "Traditional",
   "timeSignature": [4, 4],
   "defaultTempo": 80,
+  "difficulty": "beginner",
   "notes": [
     { "id": "n01", "midi": 60, "beat": 0, "durationBeats": 1, "hand": "right", "finger": 1, "lyric": "Twin" },
     { "id": "n02", "midi": 60, "beat": 1, "durationBeats": 1, "hand": "right", "finger": 1, "lyric": "kle" },

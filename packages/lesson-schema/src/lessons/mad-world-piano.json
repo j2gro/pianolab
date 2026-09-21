@@ -1,0 +1,4024 @@
+{
+  "schemaVersion": 1,
+  "id": "mad-world-piano",
+  "title": "Mad World",
+  "composer": "Unknown",
+  "timeSignature": [
+    4,
+    4
+  ],
+  "defaultTempo": 92,
+  "difficulty": "beginner",
+  "notes": [
+    {
+      "id": "n001",
+      "midi": 68,
+      "beat": 0,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n002",
+      "midi": 72,
+      "beat": 0.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n003",
+      "midi": 67,
+      "beat": 1,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n004",
+      "midi": 60,
+      "beat": 1,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n005",
+      "midi": 56,
+      "beat": 1,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n006",
+      "midi": 68,
+      "beat": 1.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n007",
+      "midi": 65,
+      "beat": 2,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n008",
+      "midi": 53,
+      "beat": 2,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n009",
+      "midi": 67,
+      "beat": 2.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n010",
+      "midi": 63,
+      "beat": 3,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n011",
+      "midi": 60,
+      "beat": 3,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n012",
+      "midi": 56,
+      "beat": 3,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n013",
+      "midi": 62,
+      "beat": 3.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n014",
+      "midi": 58,
+      "beat": 4,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n015",
+      "midi": 65,
+      "beat": 5,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n016",
+      "midi": 62,
+      "beat": 5,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n017",
+      "midi": 58,
+      "beat": 6,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n018",
+      "midi": 65,
+      "beat": 7,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n019",
+      "midi": 62,
+      "beat": 7,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n020",
+      "midi": 68,
+      "beat": 7.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n021",
+      "midi": 68,
+      "beat": 8,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n022",
+      "midi": 53,
+      "beat": 8,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n023",
+      "midi": 72,
+      "beat": 8.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n024",
+      "midi": 67,
+      "beat": 9,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n025",
+      "midi": 60,
+      "beat": 9,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n026",
+      "midi": 56,
+      "beat": 9,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n027",
+      "midi": 68,
+      "beat": 9.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n028",
+      "midi": 65,
+      "beat": 10,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n029",
+      "midi": 53,
+      "beat": 10,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n030",
+      "midi": 67,
+      "beat": 10.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n031",
+      "midi": 68,
+      "beat": 11,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n032",
+      "midi": 60,
+      "beat": 11,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n033",
+      "midi": 56,
+      "beat": 11,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n034",
+      "midi": 70,
+      "beat": 11.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n035",
+      "midi": 70,
+      "beat": 12,
+      "durationBeats": 4,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n036",
+      "midi": 58,
+      "beat": 12,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n037",
+      "midi": 65,
+      "beat": 13,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n038",
+      "midi": 62,
+      "beat": 13,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n039",
+      "midi": 58,
+      "beat": 14,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n040",
+      "midi": 65,
+      "beat": 15,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n041",
+      "midi": 62,
+      "beat": 15,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n042",
+      "midi": 53,
+      "beat": 16,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n043",
+      "midi": 65,
+      "beat": 17,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "all"
+    },
+    {
+      "id": "n044",
+      "midi": 60,
+      "beat": 17,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n045",
+      "midi": 56,
+      "beat": 17,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n046",
+      "midi": 65,
+      "beat": 17.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "a"
+    },
+    {
+      "id": "n047",
+      "midi": 68,
+      "beat": 18,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "round"
+    },
+    {
+      "id": "n048",
+      "midi": 53,
+      "beat": 18,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n049",
+      "midi": 68,
+      "beat": 18.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "me"
+    },
+    {
+      "id": "n050",
+      "midi": 65,
+      "beat": 19,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "are"
+    },
+    {
+      "id": "n051",
+      "midi": 60,
+      "beat": 19,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n052",
+      "midi": 56,
+      "beat": 19,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n053",
+      "midi": 65,
+      "beat": 19.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "fa"
+    },
+    {
+      "id": "n054",
+      "midi": 72,
+      "beat": 20,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "mi"
+    },
+    {
+      "id": "n055",
+      "midi": 56,
+      "beat": 20,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n056",
+      "midi": 72,
+      "beat": 20.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "liar"
+    },
+    {
+      "id": "n057",
+      "midi": 63,
+      "beat": 21,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n058",
+      "midi": 60,
+      "beat": 21,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n059",
+      "midi": 72,
+      "beat": 21.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "fa"
+    },
+    {
+      "id": "n060",
+      "midi": 72,
+      "beat": 22,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "ces,"
+    },
+    {
+      "id": "n061",
+      "midi": 56,
+      "beat": 22,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n062",
+      "midi": 68,
+      "beat": 22.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "good"
+    },
+    {
+      "id": "n063",
+      "midi": 63,
+      "beat": 23,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n064",
+      "midi": 60,
+      "beat": 23,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n065",
+      "midi": 70,
+      "beat": 24,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "worn"
+    },
+    {
+      "id": "n066",
+      "midi": 51,
+      "beat": 24,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n067",
+      "midi": 70,
+      "beat": 24.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "out"
+    },
+    {
+      "id": "n068",
+      "midi": 58,
+      "beat": 25,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n069",
+      "midi": 55,
+      "beat": 25,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 1
+    },
+    {
+      "id": "n070",
+      "midi": 70,
+      "beat": 25.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "pla"
+    },
+    {
+      "id": "n071",
+      "midi": 70,
+      "beat": 26,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ces,"
+    },
+    {
+      "id": "n072",
+      "midi": 51,
+      "beat": 26,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n073",
+      "midi": 67,
+      "beat": 26.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5,
+      "lyric": "day,"
+    },
+    {
+      "id": "n074",
+      "midi": 58,
+      "beat": 27,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n075",
+      "midi": 55,
+      "beat": 27,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 1
+    },
+    {
+      "id": "n076",
+      "midi": 70,
+      "beat": 28,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "worn"
+    },
+    {
+      "id": "n077",
+      "midi": 58,
+      "beat": 28,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n078",
+      "midi": 70,
+      "beat": 28.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "our"
+    },
+    {
+      "id": "n079",
+      "midi": 65,
+      "beat": 29,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n080",
+      "midi": 62,
+      "beat": 29,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n081",
+      "midi": 70,
+      "beat": 29.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "fa"
+    },
+    {
+      "id": "n082",
+      "midi": 70,
+      "beat": 30,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n083",
+      "midi": 58,
+      "beat": 30,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n084",
+      "midi": 68,
+      "beat": 30.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ces"
+    },
+    {
+      "id": "n085",
+      "midi": 67,
+      "beat": 31,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n086",
+      "midi": 65,
+      "beat": 31,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n087",
+      "midi": 62,
+      "beat": 31,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n088",
+      "midi": 65,
+      "beat": 31.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n089",
+      "midi": 53,
+      "beat": 32,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n090",
+      "midi": 65,
+      "beat": 33,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "Bright"
+    },
+    {
+      "id": "n091",
+      "midi": 60,
+      "beat": 33,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n092",
+      "midi": 56,
+      "beat": 33,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n093",
+      "midi": 65,
+      "beat": 33.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "and"
+    },
+    {
+      "id": "n094",
+      "midi": 68,
+      "beat": 34,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ear"
+    },
+    {
+      "id": "n095",
+      "midi": 53,
+      "beat": 34,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n096",
+      "midi": 68,
+      "beat": 34.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ly"
+    },
+    {
+      "id": "n097",
+      "midi": 65,
+      "beat": 35,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "for"
+    },
+    {
+      "id": "n098",
+      "midi": 60,
+      "beat": 35,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n099",
+      "midi": 56,
+      "beat": 35,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n100",
+      "midi": 65,
+      "beat": 35.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "their"
+    },
+    {
+      "id": "n101",
+      "midi": 72,
+      "beat": 36,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "dai"
+    },
+    {
+      "id": "n102",
+      "midi": 56,
+      "beat": 36,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n103",
+      "midi": 72,
+      "beat": 36.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "ly"
+    },
+    {
+      "id": "n104",
+      "midi": 63,
+      "beat": 37,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n105",
+      "midi": 60,
+      "beat": 37,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n106",
+      "midi": 72,
+      "beat": 37.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "ra"
+    },
+    {
+      "id": "n107",
+      "midi": 72,
+      "beat": 38,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n108",
+      "midi": 56,
+      "beat": 38,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n109",
+      "midi": 68,
+      "beat": 38.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ces,"
+    },
+    {
+      "id": "n110",
+      "midi": 63,
+      "beat": 39,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n111",
+      "midi": 60,
+      "beat": 39,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n112",
+      "midi": 70,
+      "beat": 40,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "go"
+    },
+    {
+      "id": "n113",
+      "midi": 51,
+      "beat": 40,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n114",
+      "midi": 70,
+      "beat": 40.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ing"
+    },
+    {
+      "id": "n115",
+      "midi": 58,
+      "beat": 41,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n116",
+      "midi": 55,
+      "beat": 41,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 1
+    },
+    {
+      "id": "n117",
+      "midi": 70,
+      "beat": 41.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "no"
+    },
+    {
+      "id": "n118",
+      "midi": 70,
+      "beat": 42,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n119",
+      "midi": 51,
+      "beat": 42,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n120",
+      "midi": 67,
+      "beat": 42.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5,
+      "lyric": "where"
+    },
+    {
+      "id": "n121",
+      "midi": 58,
+      "beat": 43,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n122",
+      "midi": 55,
+      "beat": 43,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 1
+    },
+    {
+      "id": "n123",
+      "midi": 70,
+      "beat": 44,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "go"
+    },
+    {
+      "id": "n124",
+      "midi": 58,
+      "beat": 44,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n125",
+      "midi": 70,
+      "beat": 44.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ing"
+    },
+    {
+      "id": "n126",
+      "midi": 65,
+      "beat": 45,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n127",
+      "midi": 62,
+      "beat": 45,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n128",
+      "midi": 70,
+      "beat": 45.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "no"
+    },
+    {
+      "id": "n129",
+      "midi": 70,
+      "beat": 46,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n130",
+      "midi": 58,
+      "beat": 46,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n131",
+      "midi": 68,
+      "beat": 46.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "where"
+    },
+    {
+      "id": "n132",
+      "midi": 67,
+      "beat": 47,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n133",
+      "midi": 65,
+      "beat": 47,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n134",
+      "midi": 62,
+      "beat": 47,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n135",
+      "midi": 65,
+      "beat": 47.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n136",
+      "midi": 53,
+      "beat": 48,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n137",
+      "midi": 60,
+      "beat": 49,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n138",
+      "midi": 56,
+      "beat": 49,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n139",
+      "midi": 65,
+      "beat": 49.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "Their"
+    },
+    {
+      "id": "n140",
+      "midi": 68,
+      "beat": 50,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "tears"
+    },
+    {
+      "id": "n141",
+      "midi": 53,
+      "beat": 50,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n142",
+      "midi": 68,
+      "beat": 50.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "are"
+    },
+    {
+      "id": "n143",
+      "midi": 65,
+      "beat": 51,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "fill"
+    },
+    {
+      "id": "n144",
+      "midi": 60,
+      "beat": 51,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n145",
+      "midi": 56,
+      "beat": 51,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n146",
+      "midi": 65,
+      "beat": 51.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "ing"
+    },
+    {
+      "id": "n147",
+      "midi": 72,
+      "beat": 52,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "up"
+    },
+    {
+      "id": "n148",
+      "midi": 56,
+      "beat": 52,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n149",
+      "midi": 72,
+      "beat": 52.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "their"
+    },
+    {
+      "id": "n150",
+      "midi": 63,
+      "beat": 53,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n151",
+      "midi": 60,
+      "beat": 53,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n152",
+      "midi": 72,
+      "beat": 53.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "gla"
+    },
+    {
+      "id": "n153",
+      "midi": 72,
+      "beat": 54,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n154",
+      "midi": 56,
+      "beat": 54,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n155",
+      "midi": 68,
+      "beat": 54.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "sses,"
+    },
+    {
+      "id": "n156",
+      "midi": 63,
+      "beat": 55,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n157",
+      "midi": 60,
+      "beat": 55,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n158",
+      "midi": 70,
+      "beat": 56,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "no"
+    },
+    {
+      "id": "n159",
+      "midi": 51,
+      "beat": 56,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n160",
+      "midi": 70,
+      "beat": 56.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ex"
+    },
+    {
+      "id": "n161",
+      "midi": 58,
+      "beat": 57,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n162",
+      "midi": 55,
+      "beat": 57,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 1
+    },
+    {
+      "id": "n163",
+      "midi": 70,
+      "beat": 57.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "pres"
+    },
+    {
+      "id": "n164",
+      "midi": 70,
+      "beat": 58,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n165",
+      "midi": 51,
+      "beat": 58,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n166",
+      "midi": 67,
+      "beat": 58.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5,
+      "lyric": "sion,"
+    },
+    {
+      "id": "n167",
+      "midi": 58,
+      "beat": 59,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n168",
+      "midi": 55,
+      "beat": 59,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 1
+    },
+    {
+      "id": "n169",
+      "midi": 70,
+      "beat": 60,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "no"
+    },
+    {
+      "id": "n170",
+      "midi": 58,
+      "beat": 60,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n171",
+      "midi": 70,
+      "beat": 60.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ex"
+    },
+    {
+      "id": "n172",
+      "midi": 65,
+      "beat": 61,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n173",
+      "midi": 62,
+      "beat": 61,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n174",
+      "midi": 70,
+      "beat": 61.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "pres"
+    },
+    {
+      "id": "n175",
+      "midi": 70,
+      "beat": 62,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n176",
+      "midi": 58,
+      "beat": 62,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n177",
+      "midi": 68,
+      "beat": 62.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "sion"
+    },
+    {
+      "id": "n178",
+      "midi": 67,
+      "beat": 63,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n179",
+      "midi": 65,
+      "beat": 63,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n180",
+      "midi": 62,
+      "beat": 63,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n181",
+      "midi": 65,
+      "beat": 63.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n182",
+      "midi": 53,
+      "beat": 64,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n183",
+      "midi": 65,
+      "beat": 65,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "Hide"
+    },
+    {
+      "id": "n184",
+      "midi": 60,
+      "beat": 65,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n185",
+      "midi": 56,
+      "beat": 65,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n186",
+      "midi": 65,
+      "beat": 65.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "my"
+    },
+    {
+      "id": "n187",
+      "midi": 68,
+      "beat": 66,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "head,"
+    },
+    {
+      "id": "n188",
+      "midi": 53,
+      "beat": 66,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n189",
+      "midi": 68,
+      "beat": 66.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "I"
+    },
+    {
+      "id": "n190",
+      "midi": 65,
+      "beat": 67,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "wan"
+    },
+    {
+      "id": "n191",
+      "midi": 60,
+      "beat": 67,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n192",
+      "midi": 56,
+      "beat": 67,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n193",
+      "midi": 65,
+      "beat": 67.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "na"
+    },
+    {
+      "id": "n194",
+      "midi": 72,
+      "beat": 68,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "drown"
+    },
+    {
+      "id": "n195",
+      "midi": 56,
+      "beat": 68,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n196",
+      "midi": 72,
+      "beat": 68.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "my"
+    },
+    {
+      "id": "n197",
+      "midi": 63,
+      "beat": 69,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n198",
+      "midi": 60,
+      "beat": 69,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n199",
+      "midi": 72,
+      "beat": 69.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "sor"
+    },
+    {
+      "id": "n200",
+      "midi": 72,
+      "beat": 70,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n201",
+      "midi": 56,
+      "beat": 70,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n202",
+      "midi": 68,
+      "beat": 70.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "row,"
+    },
+    {
+      "id": "n203",
+      "midi": 63,
+      "beat": 71,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n204",
+      "midi": 60,
+      "beat": 71,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n205",
+      "midi": 70,
+      "beat": 72,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "no"
+    },
+    {
+      "id": "n206",
+      "midi": 51,
+      "beat": 72,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n207",
+      "midi": 70,
+      "beat": 72.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "to"
+    },
+    {
+      "id": "n208",
+      "midi": 58,
+      "beat": 73,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n209",
+      "midi": 55,
+      "beat": 73,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 1
+    },
+    {
+      "id": "n210",
+      "midi": 70,
+      "beat": 73.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "mor"
+    },
+    {
+      "id": "n211",
+      "midi": 70,
+      "beat": 74,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n212",
+      "midi": 51,
+      "beat": 74,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n213",
+      "midi": 67,
+      "beat": 74.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5,
+      "lyric": "row,"
+    },
+    {
+      "id": "n214",
+      "midi": 58,
+      "beat": 75,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n215",
+      "midi": 55,
+      "beat": 75,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 1
+    },
+    {
+      "id": "n216",
+      "midi": 70,
+      "beat": 76,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "no"
+    },
+    {
+      "id": "n217",
+      "midi": 58,
+      "beat": 76,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n218",
+      "midi": 70,
+      "beat": 76.5,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "to"
+    },
+    {
+      "id": "n219",
+      "midi": 65,
+      "beat": 77,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n220",
+      "midi": 62,
+      "beat": 77,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n221",
+      "midi": 70,
+      "beat": 77.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "mor"
+    },
+    {
+      "id": "n222",
+      "midi": 70,
+      "beat": 78,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n223",
+      "midi": 58,
+      "beat": 78,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n224",
+      "midi": 68,
+      "beat": 78.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "row"
+    },
+    {
+      "id": "n225",
+      "midi": 67,
+      "beat": 79,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n226",
+      "midi": 65,
+      "beat": 79,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n227",
+      "midi": 62,
+      "beat": 79,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n228",
+      "midi": 65,
+      "beat": 79.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n229",
+      "midi": 53,
+      "beat": 80,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n230",
+      "midi": 65,
+      "beat": 81,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "And"
+    },
+    {
+      "id": "n231",
+      "midi": 60,
+      "beat": 81,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n232",
+      "midi": 56,
+      "beat": 81,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n233",
+      "midi": 65,
+      "beat": 81.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "I"
+    },
+    {
+      "id": "n234",
+      "midi": 68,
+      "beat": 82,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "find"
+    },
+    {
+      "id": "n235",
+      "midi": 53,
+      "beat": 82,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n236",
+      "midi": 68,
+      "beat": 82.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "it"
+    },
+    {
+      "id": "n237",
+      "midi": 72,
+      "beat": 83,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "kin"
+    },
+    {
+      "id": "n238",
+      "midi": 60,
+      "beat": 83,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n239",
+      "midi": 56,
+      "beat": 83,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n240",
+      "midi": 72,
+      "beat": 83.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "da"
+    },
+    {
+      "id": "n241",
+      "midi": 74,
+      "beat": 84,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "fun"
+    },
+    {
+      "id": "n242",
+      "midi": 58,
+      "beat": 84,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n243",
+      "midi": 70,
+      "beat": 84.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ny,"
+    },
+    {
+      "id": "n244",
+      "midi": 65,
+      "beat": 85,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n245",
+      "midi": 62,
+      "beat": 85,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n246",
+      "midi": 70,
+      "beat": 85.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "I"
+    },
+    {
+      "id": "n247",
+      "midi": 74,
+      "beat": 86,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "find"
+    },
+    {
+      "id": "n248",
+      "midi": 58,
+      "beat": 86,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n249",
+      "midi": 74,
+      "beat": 86.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "it"
+    },
+    {
+      "id": "n250",
+      "midi": 70,
+      "beat": 87,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "kin"
+    },
+    {
+      "id": "n251",
+      "midi": 65,
+      "beat": 87,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n252",
+      "midi": 62,
+      "beat": 87,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n253",
+      "midi": 70,
+      "beat": 87.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "da"
+    },
+    {
+      "id": "n254",
+      "midi": 65,
+      "beat": 88,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "sad"
+    },
+    {
+      "id": "n255",
+      "midi": 53,
+      "beat": 88,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n256",
+      "midi": 60,
+      "beat": 89,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n257",
+      "midi": 56,
+      "beat": 89,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n258",
+      "midi": 65,
+      "beat": 89.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "that"
+    },
+    {
+      "id": "n259",
+      "midi": 68,
+      "beat": 90,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "dreams"
+    },
+    {
+      "id": "n260",
+      "midi": 53,
+      "beat": 90,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n261",
+      "midi": 68,
+      "beat": 90.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "in"
+    },
+    {
+      "id": "n262",
+      "midi": 72,
+      "beat": 91,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "which"
+    },
+    {
+      "id": "n263",
+      "midi": 60,
+      "beat": 91,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n264",
+      "midi": 56,
+      "beat": 91,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n265",
+      "midi": 72,
+      "beat": 91.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "I'm"
+    },
+    {
+      "id": "n266",
+      "midi": 74,
+      "beat": 92,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "dy"
+    },
+    {
+      "id": "n267",
+      "midi": 58,
+      "beat": 92,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n268",
+      "midi": 70,
+      "beat": 92.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ing"
+    },
+    {
+      "id": "n269",
+      "midi": 70,
+      "beat": 93,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "are"
+    },
+    {
+      "id": "n270",
+      "midi": 65,
+      "beat": 93,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n271",
+      "midi": 62,
+      "beat": 93,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n272",
+      "midi": 70,
+      "beat": 93.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "the"
+    },
+    {
+      "id": "n273",
+      "midi": 74,
+      "beat": 94,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "best"
+    },
+    {
+      "id": "n274",
+      "midi": 58,
+      "beat": 94,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n275",
+      "midi": 74,
+      "beat": 94.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "I've"
+    },
+    {
+      "id": "n276",
+      "midi": 70,
+      "beat": 95,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ev"
+    },
+    {
+      "id": "n277",
+      "midi": 65,
+      "beat": 95,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n278",
+      "midi": 62,
+      "beat": 95,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n279",
+      "midi": 70,
+      "beat": 95.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "er"
+    },
+    {
+      "id": "n280",
+      "midi": 65,
+      "beat": 96,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "had."
+    },
+    {
+      "id": "n281",
+      "midi": 53,
+      "beat": 96,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n282",
+      "midi": 60,
+      "beat": 97,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n283",
+      "midi": 56,
+      "beat": 97,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n284",
+      "midi": 65,
+      "beat": 97.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "I"
+    },
+    {
+      "id": "n285",
+      "midi": 68,
+      "beat": 98,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "find"
+    },
+    {
+      "id": "n286",
+      "midi": 53,
+      "beat": 98,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n287",
+      "midi": 68,
+      "beat": 98.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "it"
+    },
+    {
+      "id": "n288",
+      "midi": 72,
+      "beat": 99,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "hard"
+    },
+    {
+      "id": "n289",
+      "midi": 60,
+      "beat": 99,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n290",
+      "midi": 56,
+      "beat": 99,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n291",
+      "midi": 72,
+      "beat": 99.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "to"
+    },
+    {
+      "id": "n292",
+      "midi": 74,
+      "beat": 100,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "tell"
+    },
+    {
+      "id": "n293",
+      "midi": 58,
+      "beat": 100,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n294",
+      "midi": 70,
+      "beat": 100.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "you,"
+    },
+    {
+      "id": "n295",
+      "midi": 65,
+      "beat": 101,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n296",
+      "midi": 62,
+      "beat": 101,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n297",
+      "midi": 70,
+      "beat": 101.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "I"
+    },
+    {
+      "id": "n298",
+      "midi": 74,
+      "beat": 102,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "find"
+    },
+    {
+      "id": "n299",
+      "midi": 58,
+      "beat": 102,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n300",
+      "midi": 74,
+      "beat": 102.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "it"
+    },
+    {
+      "id": "n301",
+      "midi": 70,
+      "beat": 103,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "hard"
+    },
+    {
+      "id": "n302",
+      "midi": 65,
+      "beat": 103,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n303",
+      "midi": 62,
+      "beat": 103,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n304",
+      "midi": 70,
+      "beat": 103.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "to"
+    },
+    {
+      "id": "n305",
+      "midi": 65,
+      "beat": 104,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "take"
+    },
+    {
+      "id": "n306",
+      "midi": 53,
+      "beat": 104,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n307",
+      "midi": 60,
+      "beat": 105,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n308",
+      "midi": 56,
+      "beat": 105,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n309",
+      "midi": 65,
+      "beat": 105.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "when"
+    },
+    {
+      "id": "n310",
+      "midi": 68,
+      "beat": 106,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "peo"
+    },
+    {
+      "id": "n311",
+      "midi": 53,
+      "beat": 106,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n312",
+      "midi": 68,
+      "beat": 106.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ple"
+    },
+    {
+      "id": "n313",
+      "midi": 72,
+      "beat": 107,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "run"
+    },
+    {
+      "id": "n314",
+      "midi": 60,
+      "beat": 107,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n315",
+      "midi": 56,
+      "beat": 107,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n316",
+      "midi": 72,
+      "beat": 107.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "in"
+    },
+    {
+      "id": "n317",
+      "midi": 74,
+      "beat": 108,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "cir"
+    },
+    {
+      "id": "n318",
+      "midi": 62,
+      "beat": 108,
+      "durationBeats": 4,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n319",
+      "midi": 58,
+      "beat": 108,
+      "durationBeats": 4,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n320",
+      "midi": 70,
+      "beat": 108.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "cles"
+    },
+    {
+      "id": "n321",
+      "midi": 70,
+      "beat": 109,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "it's"
+    },
+    {
+      "id": "n322",
+      "midi": 70,
+      "beat": 109.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "a"
+    },
+    {
+      "id": "n323",
+      "midi": 74,
+      "beat": 110,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ve"
+    },
+    {
+      "id": "n324",
+      "midi": 74,
+      "beat": 110.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ry"
+    },
+    {
+      "id": "n325",
+      "midi": 70,
+      "beat": 111,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ve"
+    },
+    {
+      "id": "n326",
+      "midi": 70,
+      "beat": 111.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "ry"
+    },
+    {
+      "id": "n327",
+      "midi": 72,
+      "beat": 112,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n328",
+      "midi": 68,
+      "beat": 112,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n329",
+      "midi": 53,
+      "beat": 112,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n330",
+      "midi": 72,
+      "beat": 112.5,
+      "durationBeats": 1.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n331",
+      "midi": 68,
+      "beat": 112.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n332",
+      "midi": 67,
+      "beat": 113,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n333",
+      "midi": 60,
+      "beat": 113,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n334",
+      "midi": 56,
+      "beat": 113,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n335",
+      "midi": 67,
+      "beat": 113.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n336",
+      "midi": 68,
+      "beat": 114,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "mad"
+    },
+    {
+      "id": "n337",
+      "midi": 65,
+      "beat": 114,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n338",
+      "midi": 53,
+      "beat": 114,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n339",
+      "midi": 65,
+      "beat": 114.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n340",
+      "midi": 63,
+      "beat": 115,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n341",
+      "midi": 60,
+      "beat": 115,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n342",
+      "midi": 56,
+      "beat": 115,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n343",
+      "midi": 62,
+      "beat": 115.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "world"
+    },
+    {
+      "id": "n344",
+      "midi": 62,
+      "beat": 116,
+      "durationBeats": 3,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n345",
+      "midi": 58,
+      "beat": 116,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n346",
+      "midi": 65,
+      "beat": 117,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n347",
+      "midi": 62,
+      "beat": 117,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n348",
+      "midi": 58,
+      "beat": 118,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n349",
+      "midi": 67,
+      "beat": 119,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n350",
+      "midi": 65,
+      "beat": 119,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n351",
+      "midi": 62,
+      "beat": 119,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n352",
+      "midi": 68,
+      "beat": 119.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n353",
+      "midi": 68,
+      "beat": 120,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n354",
+      "midi": 53,
+      "beat": 120,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n355",
+      "midi": 72,
+      "beat": 120.5,
+      "durationBeats": 1.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n356",
+      "midi": 68,
+      "beat": 120.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n357",
+      "midi": 67,
+      "beat": 121,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n358",
+      "midi": 60,
+      "beat": 121,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n359",
+      "midi": 56,
+      "beat": 121,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n360",
+      "midi": 67,
+      "beat": 121.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n361",
+      "midi": 68,
+      "beat": 122,
+      "durationBeats": 1.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "mad"
+    },
+    {
+      "id": "n362",
+      "midi": 65,
+      "beat": 122,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n363",
+      "midi": 53,
+      "beat": 122,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n364",
+      "midi": 65,
+      "beat": 122.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n365",
+      "midi": 63,
+      "beat": 123,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n366",
+      "midi": 60,
+      "beat": 123,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n367",
+      "midi": 56,
+      "beat": 123,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n368",
+      "midi": 70,
+      "beat": 123.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n369",
+      "midi": 62,
+      "beat": 123.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "world"
+    },
+    {
+      "id": "n370",
+      "midi": 70,
+      "beat": 124,
+      "durationBeats": 4,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n371",
+      "midi": 62,
+      "beat": 124,
+      "durationBeats": 4,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n372",
+      "midi": 58,
+      "beat": 124,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n373",
+      "midi": 65,
+      "beat": 125,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n374",
+      "midi": 62,
+      "beat": 125,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n375",
+      "midi": 58,
+      "beat": 126,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n376",
+      "midi": 65,
+      "beat": 127,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n377",
+      "midi": 62,
+      "beat": 127,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n378",
+      "midi": 72,
+      "beat": 128,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n379",
+      "midi": 68,
+      "beat": 128,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n380",
+      "midi": 53,
+      "beat": 128,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n381",
+      "midi": 72,
+      "beat": 128.5,
+      "durationBeats": 1.5,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n382",
+      "midi": 68,
+      "beat": 128.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n383",
+      "midi": 67,
+      "beat": 129,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n384",
+      "midi": 60,
+      "beat": 129,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n385",
+      "midi": 56,
+      "beat": 129,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n386",
+      "midi": 67,
+      "beat": 129.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5,
+      "lyric": "en"
+    },
+    {
+      "id": "n387",
+      "midi": 68,
+      "beat": 130,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "larg"
+    },
+    {
+      "id": "n388",
+      "midi": 65,
+      "beat": 130,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n389",
+      "midi": 53,
+      "beat": 130,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n390",
+      "midi": 65,
+      "beat": 130.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "en"
+    },
+    {
+      "id": "n391",
+      "midi": 63,
+      "beat": 131,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "your"
+    },
+    {
+      "id": "n392",
+      "midi": 60,
+      "beat": 131,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n393",
+      "midi": 56,
+      "beat": 131,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n394",
+      "midi": 62,
+      "beat": 131.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "world"
+    },
+    {
+      "id": "n395",
+      "midi": 62,
+      "beat": 132,
+      "durationBeats": 4,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n396",
+      "midi": 58,
+      "beat": 132,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n397",
+      "midi": 65,
+      "beat": 133,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n398",
+      "midi": 62,
+      "beat": 133,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n399",
+      "midi": 58,
+      "beat": 134,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n400",
+      "midi": 67,
+      "beat": 135,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n401",
+      "midi": 65,
+      "beat": 135,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n402",
+      "midi": 62,
+      "beat": 135,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n403",
+      "midi": 68,
+      "beat": 135.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n404",
+      "midi": 68,
+      "beat": 136,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n405",
+      "midi": 53,
+      "beat": 136,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n406",
+      "midi": 68,
+      "beat": 136.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n407",
+      "midi": 67,
+      "beat": 137,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n408",
+      "midi": 60,
+      "beat": 137,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n409",
+      "midi": 56,
+      "beat": 137,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n410",
+      "midi": 67,
+      "beat": 137.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 5
+    },
+    {
+      "id": "n411",
+      "midi": 68,
+      "beat": 138,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n412",
+      "midi": 65,
+      "beat": 138,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n413",
+      "midi": 60,
+      "beat": 138,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "mad"
+    },
+    {
+      "id": "n414",
+      "midi": 53,
+      "beat": 138,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n415",
+      "midi": 65,
+      "beat": 138.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n416",
+      "midi": 63,
+      "beat": 139,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n417",
+      "midi": 60,
+      "beat": 139,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n418",
+      "midi": 56,
+      "beat": 139,
+      "durationBeats": 1,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n419",
+      "midi": 65,
+      "beat": 139.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n420",
+      "midi": 62,
+      "beat": 139.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "world"
+    },
+    {
+      "id": "n421",
+      "midi": 65,
+      "beat": 140,
+      "durationBeats": 4,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n422",
+      "midi": 62,
+      "beat": 140,
+      "durationBeats": 4,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n423",
+      "midi": 58,
+      "beat": 140,
+      "durationBeats": 4,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n424",
+      "midi": 46,
+      "beat": 140,
+      "durationBeats": 4,
+      "hand": "left",
+      "finger": 2
+    }
+  ],
+  "phrases": [
+    {
+      "id": "p1",
+      "title": "Phrase 1",
+      "noteIds": [
+        "n001",
+        "n002",
+        "n003",
+        "n004",
+        "n005",
+        "n006",
+        "n007",
+        "n008",
+        "n009",
+        "n010",
+        "n011",
+        "n012",
+        "n013",
+        "n014",
+        "n015",
+        "n016",
+        "n017",
+        "n018",
+        "n019",
+        "n020",
+        "n021",
+        "n022",
+        "n023",
+        "n024",
+        "n025",
+        "n026",
+        "n027",
+        "n028",
+        "n029",
+        "n030",
+        "n031",
+        "n032",
+        "n033",
+        "n034",
+        "n035",
+        "n036",
+        "n037",
+        "n038",
+        "n039",
+        "n040",
+        "n041"
+      ]
+    },
+    {
+      "id": "p2",
+      "title": "Phrase 2",
+      "noteIds": [
+        "n042",
+        "n043",
+        "n044",
+        "n045",
+        "n046",
+        "n047",
+        "n048",
+        "n049",
+        "n050",
+        "n051",
+        "n052",
+        "n053",
+        "n054",
+        "n055",
+        "n056",
+        "n057",
+        "n058",
+        "n059",
+        "n060",
+        "n061",
+        "n062",
+        "n063",
+        "n064",
+        "n065",
+        "n066",
+        "n067",
+        "n068",
+        "n069",
+        "n070",
+        "n071",
+        "n072",
+        "n073",
+        "n074",
+        "n075",
+        "n076",
+        "n077",
+        "n078",
+        "n079",
+        "n080",
+        "n081",
+        "n082",
+        "n083",
+        "n084",
+        "n085",
+        "n086",
+        "n087",
+        "n088"
+      ]
+    },
+    {
+      "id": "p3",
+      "title": "Phrase 3",
+      "noteIds": [
+        "n089",
+        "n090",
+        "n091",
+        "n092",
+        "n093",
+        "n094",
+        "n095",
+        "n096",
+        "n097",
+        "n098",
+        "n099",
+        "n100",
+        "n101",
+        "n102",
+        "n103",
+        "n104",
+        "n105",
+        "n106",
+        "n107",
+        "n108",
+        "n109",
+        "n110",
+        "n111",
+        "n112",
+        "n113",
+        "n114",
+        "n115",
+        "n116",
+        "n117",
+        "n118",
+        "n119",
+        "n120",
+        "n121",
+        "n122",
+        "n123",
+        "n124",
+        "n125",
+        "n126",
+        "n127",
+        "n128",
+        "n129",
+        "n130",
+        "n131",
+        "n132",
+        "n133",
+        "n134",
+        "n135"
+      ]
+    },
+    {
+      "id": "p4",
+      "title": "Phrase 4",
+      "noteIds": [
+        "n136",
+        "n137",
+        "n138",
+        "n139",
+        "n140",
+        "n141",
+        "n142",
+        "n143",
+        "n144",
+        "n145",
+        "n146",
+        "n147",
+        "n148",
+        "n149",
+        "n150",
+        "n151",
+        "n152",
+        "n153",
+        "n154",
+        "n155",
+        "n156",
+        "n157",
+        "n158",
+        "n159",
+        "n160",
+        "n161",
+        "n162",
+        "n163",
+        "n164",
+        "n165",
+        "n166",
+        "n167",
+        "n168",
+        "n169",
+        "n170",
+        "n171",
+        "n172",
+        "n173",
+        "n174",
+        "n175",
+        "n176",
+        "n177",
+        "n178",
+        "n179",
+        "n180",
+        "n181"
+      ]
+    },
+    {
+      "id": "p5",
+      "title": "Phrase 5",
+      "noteIds": [
+        "n182",
+        "n183",
+        "n184",
+        "n185",
+        "n186",
+        "n187",
+        "n188",
+        "n189",
+        "n190",
+        "n191",
+        "n192",
+        "n193",
+        "n194",
+        "n195",
+        "n196",
+        "n197",
+        "n198",
+        "n199",
+        "n200",
+        "n201",
+        "n202",
+        "n203",
+        "n204",
+        "n205",
+        "n206",
+        "n207",
+        "n208",
+        "n209",
+        "n210",
+        "n211",
+        "n212",
+        "n213",
+        "n214",
+        "n215",
+        "n216",
+        "n217",
+        "n218",
+        "n219",
+        "n220",
+        "n221",
+        "n222",
+        "n223",
+        "n224",
+        "n225",
+        "n226",
+        "n227",
+        "n228"
+      ]
+    },
+    {
+      "id": "p6",
+      "title": "Phrase 6",
+      "noteIds": [
+        "n229",
+        "n230",
+        "n231",
+        "n232",
+        "n233",
+        "n234",
+        "n235",
+        "n236",
+        "n237",
+        "n238",
+        "n239",
+        "n240",
+        "n241",
+        "n242",
+        "n243",
+        "n244",
+        "n245",
+        "n246",
+        "n247",
+        "n248",
+        "n249",
+        "n250",
+        "n251",
+        "n252",
+        "n253",
+        "n254",
+        "n255",
+        "n256",
+        "n257",
+        "n258",
+        "n259",
+        "n260",
+        "n261",
+        "n262",
+        "n263",
+        "n264",
+        "n265",
+        "n266",
+        "n267",
+        "n268",
+        "n269",
+        "n270",
+        "n271",
+        "n272",
+        "n273",
+        "n274",
+        "n275",
+        "n276",
+        "n277",
+        "n278",
+        "n279"
+      ]
+    },
+    {
+      "id": "p7",
+      "title": "Phrase 7",
+      "noteIds": [
+        "n280",
+        "n281",
+        "n282",
+        "n283",
+        "n284",
+        "n285",
+        "n286",
+        "n287",
+        "n288",
+        "n289",
+        "n290",
+        "n291",
+        "n292",
+        "n293",
+        "n294",
+        "n295",
+        "n296",
+        "n297",
+        "n298",
+        "n299",
+        "n300",
+        "n301",
+        "n302",
+        "n303",
+        "n304",
+        "n305",
+        "n306",
+        "n307",
+        "n308",
+        "n309",
+        "n310",
+        "n311",
+        "n312",
+        "n313",
+        "n314",
+        "n315",
+        "n316",
+        "n317",
+        "n318",
+        "n319",
+        "n320",
+        "n321",
+        "n322",
+        "n323",
+        "n324",
+        "n325",
+        "n326"
+      ]
+    },
+    {
+      "id": "p8",
+      "title": "Phrase 8",
+      "noteIds": [
+        "n327",
+        "n328",
+        "n329",
+        "n330",
+        "n331",
+        "n332",
+        "n333",
+        "n334",
+        "n335",
+        "n336",
+        "n337",
+        "n338",
+        "n339",
+        "n340",
+        "n341",
+        "n342",
+        "n343",
+        "n344",
+        "n345",
+        "n346",
+        "n347",
+        "n348",
+        "n349",
+        "n350",
+        "n351",
+        "n352",
+        "n353",
+        "n354",
+        "n355",
+        "n356",
+        "n357",
+        "n358",
+        "n359",
+        "n360",
+        "n361",
+        "n362",
+        "n363",
+        "n364",
+        "n365",
+        "n366",
+        "n367",
+        "n368",
+        "n369",
+        "n370",
+        "n371",
+        "n372",
+        "n373",
+        "n374",
+        "n375",
+        "n376",
+        "n377"
+      ]
+    },
+    {
+      "id": "p9",
+      "title": "Phrase 9",
+      "noteIds": [
+        "n378",
+        "n379",
+        "n380",
+        "n381",
+        "n382",
+        "n383",
+        "n384",
+        "n385",
+        "n386",
+        "n387",
+        "n388",
+        "n389",
+        "n390",
+        "n391",
+        "n392",
+        "n393",
+        "n394",
+        "n395",
+        "n396",
+        "n397",
+        "n398",
+        "n399",
+        "n400",
+        "n401",
+        "n402",
+        "n403",
+        "n404",
+        "n405",
+        "n406",
+        "n407",
+        "n408",
+        "n409",
+        "n410",
+        "n411",
+        "n412",
+        "n413",
+        "n414",
+        "n415",
+        "n416",
+        "n417",
+        "n418",
+        "n419",
+        "n420",
+        "n421",
+        "n422",
+        "n423",
+        "n424"
+      ]
+    }
+  ]
+}

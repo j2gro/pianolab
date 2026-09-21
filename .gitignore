@@ -9,4 +9,7 @@ coverage
 .env
 .env.*
 !.env.example
+certs
 apps/api/data
+.tmp-mxl
+.vercel

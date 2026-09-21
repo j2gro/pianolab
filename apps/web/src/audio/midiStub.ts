@@ -16,6 +16,7 @@ type MidiAccess = {
 export async function startMidiAdapter(
   now: () => number,
   onDetected: (note: DetectedNote) => void,
+  onRelease?: (midi: number) => void,
 ): Promise<() => void> {
   const nav = navigator as Navigator & {
     requestMIDIAccess?: () => Promise<MidiAccess>;
@@ -35,6 +36,10 @@ export async function startMidiAdapter(
       const velocity = data[2]!;
       if (status === 0x90 && velocity > 0) {
         onDetected({ midi, cents: 0, t: now() });
+        return;
+      }
+      if (status === 0x80 || (status === 0x90 && velocity === 0)) {
+        onRelease?.(midi);
       }
     };
     access.inputs.forEach((input) => {

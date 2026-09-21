@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import type { LessonNote } from "@pianolab/lesson-schema";
 import { isPitchHit } from "./matcher";
+import { playAlongCountDigit, playAlongLeadInSec } from "./countIn";
 import { createTransport } from "./transport";
 import { frequencyToMidi } from "./matcher";
 import { yinPitch } from "./yin";
@@ -173,6 +174,142 @@ test("Wait to listen resumes autoplay from the current note", () => {
   assert.equal(snap.states.b, "hit");
 });
 
+test("Pause freezes listen playback until start resumes", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 }), note({ id: "b", midi: 62, beat: 2 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "listen",
+    now: () => t,
+    stableMs: 0,
+  });
+  transport.start();
+  t = 0.5;
+  let snap = transport.tick();
+  assert.equal(snap.running, true);
+  assert.equal(snap.states.a, "hit");
+  assert.equal(snap.states.b, "upcoming");
+
+  transport.pause();
+  snap = transport.tick();
+  assert.equal(snap.running, false);
+  const pausedAt = snap.timeSec;
+
+  t = 3;
+  snap = transport.tick();
+  assert.equal(snap.running, false);
+  assert.equal(snap.timeSec, pausedAt);
+  assert.equal(snap.states.b, "upcoming");
+
+  transport.start();
+  t = 3.5;
+  snap = transport.tick();
+  assert.equal(snap.running, true);
+  assert.ok(snap.timeSec > pausedAt);
+  assert.equal(snap.states.b, "upcoming");
+
+  t = 5;
+  snap = transport.tick();
+  assert.equal(snap.states.b, "hit");
+});
+
+test("lead-in delays beat 0 until the count-in elapses", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 }), note({ id: "b", midi: 62, beat: 1 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "listen",
+    now: () => t,
+    leadInSec: 2,
+    stableMs: 0,
+  });
+  transport.start();
+  let snap = transport.tick();
+  assert.equal(snap.timeSec, -2);
+  assert.equal(snap.states.a, "upcoming");
+  assert.deepEqual(snap.attacksThisTick, []);
+
+  t = 0.5;
+  snap = transport.tick();
+  assert.ok(snap.timeSec < 0);
+  assert.equal(snap.states.a, "upcoming");
+  assert.deepEqual(snap.attacksThisTick, []);
+
+  t = 2;
+  snap = transport.tick();
+  assert.ok(Math.abs(snap.timeSec) < 1e-9);
+  assert.equal(snap.states.a, "hit");
+  assert.deepEqual(snap.attacksThisTick, ["a"]);
+
+  t = 3;
+  snap = transport.tick();
+  assert.equal(snap.states.b, "hit");
+});
+
+test("play-along count-in hides after 1 for one beat before music", () => {
+  const tempo = 120;
+  const lead = playAlongLeadInSec(tempo);
+  assert.equal(lead, 5.5);
+  assert.equal(playAlongCountDigit(-lead, tempo), 5);
+  assert.equal(playAlongCountDigit(-1.5, tempo), 1);
+  assert.equal(playAlongCountDigit(-0.5, tempo), null);
+  assert.equal(playAlongCountDigit(-0.01, tempo), null);
+  assert.equal(playAlongCountDigit(0, tempo), null);
+});
+
+test("play-along lead-in does not miss the first note", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "play-along",
+    now: () => t,
+    leadInSec: 5,
+    stableMs: 0,
+    lateMs: 150,
+  });
+  transport.start();
+  t = 1;
+  let snap = transport.tick();
+  assert.equal(snap.states.a, "upcoming");
+  assert.equal(snap.waiting, false);
+
+  t = 5.05;
+  snap = transport.tick();
+  assert.equal(snap.states.a, "due");
+  assert.equal(snap.states.a === "missed", false);
+});
+
+test("setTempo keeps the current beat and changes speed", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 }), note({ id: "b", midi: 62, beat: 2 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "listen",
+    now: () => t,
+    stableMs: 0,
+  });
+  transport.start();
+  t = 1;
+  let snap = transport.tick();
+  assert.equal(snap.beat, 1);
+  assert.equal(snap.states.b, "upcoming");
+
+  transport.setTempo(120);
+  snap = transport.tick();
+  assert.ok(Math.abs(snap.beat - 1) < 1e-9);
+  assert.equal(snap.timeSec, 0.5);
+
+  t = 1.5;
+  snap = transport.tick();
+  assert.ok(Math.abs(snap.beat - 2) < 1e-9);
+  assert.equal(snap.states.b, "hit");
+});
+
 test("YIN estimates a C4 sine", () => {
   const sampleRate = 44100;
   const freq = 261.63;
@@ -184,4 +321,122 @@ test("YIN estimates a C4 sine", () => {
   assert.ok(result);
   const { midi } = frequencyToMidi(result.frequency);
   assert.equal(midi, 60);
+});
+
+test("seek jumps listen time and note states", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 }), note({ id: "b", midi: 62, beat: 4 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "listen",
+    now: () => t,
+    stableMs: 0,
+  });
+  transport.start();
+  t = 0.2;
+  let snap = transport.tick();
+  assert.equal(snap.states.a, "hit");
+  assert.equal(snap.states.b, "upcoming");
+
+  transport.seek(3.5);
+  snap = transport.tick();
+  assert.ok(Math.abs(snap.timeSec - 3.5) < 1e-9);
+  assert.equal(snap.running, true);
+  assert.equal(snap.states.a, "hit");
+  assert.equal(snap.states.b, "upcoming");
+  assert.deepEqual(snap.attacksThisTick, []);
+
+  t = 1.2;
+  snap = transport.tick();
+  assert.ok(Math.abs(snap.timeSec - 4.5) < 1e-9);
+  assert.equal(snap.states.b, "hit");
+});
+
+test("seek while paused stays paused", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 }), note({ id: "b", midi: 62, beat: 2 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "listen",
+    now: () => t,
+    stableMs: 0,
+  });
+  transport.start();
+  t = 0.4;
+  transport.tick();
+  transport.pause();
+  transport.seek(1.5);
+  t = 8;
+  const snap = transport.tick();
+  assert.equal(snap.running, false);
+  assert.ok(Math.abs(snap.timeSec - 1.5) < 1e-9);
+  assert.equal(snap.states.a, "hit");
+  assert.equal(snap.states.b, "upcoming");
+});
+
+test("seek in wait gates on the note at the playhead", () => {
+  let t = 0;
+  const notes = [
+    note({ id: "a", midi: 60, beat: 0 }),
+    note({ id: "b", midi: 62, beat: 2 }),
+    note({ id: "c", midi: 64, beat: 4 }),
+  ];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "wait",
+    now: () => t,
+    stableMs: 0,
+  });
+  transport.start();
+  transport.tick();
+  transport.seek(2.25);
+  let snap = transport.tick();
+  assert.ok(Math.abs(snap.timeSec - 2.25) < 1e-9);
+  assert.equal(snap.states.a, "hit");
+  assert.equal(snap.states.b, "waiting");
+  assert.equal(snap.states.c, "upcoming");
+  assert.equal(snap.currentNoteId, "b");
+
+  t = 5;
+  snap = transport.tick();
+  assert.ok(Math.abs(snap.timeSec - 2.25) < 1e-9);
+  assert.equal(snap.waiting, true);
+  assert.equal(snap.states.c, "upcoming");
+
+  transport.reportDetected({ midi: 62, cents: 0, t });
+  snap = transport.tick();
+  assert.equal(snap.states.b, "hit");
+});
+
+test("restart returns to lead-in with upcoming notes", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 }), note({ id: "b", midi: 62, beat: 1 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "listen",
+    now: () => t,
+    leadInSec: 2,
+    stableMs: 0,
+  });
+  transport.start();
+  t = 3;
+  let snap = transport.tick();
+  assert.equal(snap.states.a, "hit");
+
+  transport.restart();
+  snap = transport.tick();
+  assert.equal(snap.running, true);
+  assert.ok(Math.abs(snap.timeSec + 2) < 1e-6);
+  assert.equal(snap.states.a, "upcoming");
+  assert.equal(snap.states.b, "upcoming");
+  assert.equal(snap.complete, false);
+
+  t = 5;
+  snap = transport.tick();
+  assert.ok(Math.abs(snap.timeSec) < 1e-6);
+  assert.equal(snap.states.a, "hit");
 });

@@ -16,23 +16,40 @@ export const KEY_TO_MIDI: Record<string, number> = {
   k: 72,
 };
 
+function midiFromKey(key: string, code: string): number | undefined {
+  return KEY_TO_MIDI[key.toLowerCase()] ?? KEY_TO_MIDI[code.replace("Key", "").toLowerCase()];
+}
+
 export function startComputerKeyboard(
   now: () => number,
   onDetected: (note: DetectedNote) => void,
+  onRelease?: (midi: number) => void,
 ): () => void {
-  const down = new Set<string>();
+  const down = new Map<string, number>();
   const onDown = (event: KeyboardEvent) => {
     if (event.repeat || event.metaKey || event.ctrlKey || event.altKey) {
       return;
     }
-    const midi = KEY_TO_MIDI[event.key.toLowerCase()] ?? KEY_TO_MIDI[event.code.replace("Key", "").toLowerCase()];
+    const midi = midiFromKey(event.key, event.code);
     if (midi === undefined) {
       return;
     }
     event.preventDefault();
-    down.add(event.key);
+    down.set(event.key, midi);
     onDetected({ midi, cents: 0, t: now() });
   };
+  const onUp = (event: KeyboardEvent) => {
+    const midi = down.get(event.key) ?? midiFromKey(event.key, event.code);
+    if (midi === undefined) {
+      return;
+    }
+    down.delete(event.key);
+    onRelease?.(midi);
+  };
   window.addEventListener("keydown", onDown, true);
-  return () => window.removeEventListener("keydown", onDown, true);
+  window.addEventListener("keyup", onUp, true);
+  return () => {
+    window.removeEventListener("keydown", onDown, true);
+    window.removeEventListener("keyup", onUp, true);
+  };
 }

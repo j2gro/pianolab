@@ -1,0 +1,840 @@
+{
+  "schemaVersion": 1,
+  "id": "amazing-grace-easy-piano",
+  "title": "Amazing Grace",
+  "composer": "Unknown",
+  "timeSignature": [
+    3,
+    4
+  ],
+  "defaultTempo": 80,
+  "difficulty": "beginner",
+  "notes": [
+    {
+      "id": "n01",
+      "midi": 60,
+      "beat": 2,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "A"
+    },
+    {
+      "id": "n02",
+      "midi": 65,
+      "beat": 3,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "ma"
+    },
+    {
+      "id": "n03",
+      "midi": 41,
+      "beat": 3,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n04",
+      "midi": 48,
+      "beat": 3.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n05",
+      "midi": 53,
+      "beat": 4,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n06",
+      "midi": 69,
+      "beat": 5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "zing"
+    },
+    {
+      "id": "n07",
+      "midi": 65,
+      "beat": 5.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n08",
+      "midi": 69,
+      "beat": 6,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "grace"
+    },
+    {
+      "id": "n09",
+      "midi": 41,
+      "beat": 6,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n10",
+      "midi": 48,
+      "beat": 6.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n11",
+      "midi": 53,
+      "beat": 7,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n12",
+      "midi": 67,
+      "beat": 8,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 5,
+      "lyric": "how"
+    },
+    {
+      "id": "n13",
+      "midi": 65,
+      "beat": 9,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "sweet"
+    },
+    {
+      "id": "n14",
+      "midi": 46,
+      "beat": 9,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n15",
+      "midi": 50,
+      "beat": 9.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n16",
+      "midi": 58,
+      "beat": 10,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n17",
+      "midi": 62,
+      "beat": 11,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "the"
+    },
+    {
+      "id": "n18",
+      "midi": 60,
+      "beat": 12,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "sound"
+    },
+    {
+      "id": "n19",
+      "midi": 41,
+      "beat": 12,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n20",
+      "midi": 48,
+      "beat": 12.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n21",
+      "midi": 53,
+      "beat": 13,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n22",
+      "midi": 60,
+      "beat": 14,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "that"
+    },
+    {
+      "id": "n23",
+      "midi": 65,
+      "beat": 15,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "saved"
+    },
+    {
+      "id": "n24",
+      "midi": 41,
+      "beat": 15,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n25",
+      "midi": 48,
+      "beat": 15.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n26",
+      "midi": 53,
+      "beat": 16,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n27",
+      "midi": 69,
+      "beat": 17,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "a"
+    },
+    {
+      "id": "n28",
+      "midi": 65,
+      "beat": 17.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n29",
+      "midi": 69,
+      "beat": 18,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "wretch"
+    },
+    {
+      "id": "n30",
+      "midi": 41,
+      "beat": 18,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n31",
+      "midi": 48,
+      "beat": 18.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n32",
+      "midi": 53,
+      "beat": 19,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n33",
+      "midi": 67,
+      "beat": 20,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 5,
+      "lyric": "like"
+    },
+    {
+      "id": "n34",
+      "midi": 72,
+      "beat": 21,
+      "durationBeats": 3,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "me."
+    },
+    {
+      "id": "n35",
+      "midi": 48,
+      "beat": 21,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n36",
+      "midi": 52,
+      "beat": 21.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 3
+    },
+    {
+      "id": "n37",
+      "midi": 60,
+      "beat": 22,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n38",
+      "midi": 72,
+      "beat": 24,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 1
+    },
+    {
+      "id": "n39",
+      "midi": 48,
+      "beat": 24,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n40",
+      "midi": 52,
+      "beat": 24.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 3
+    },
+    {
+      "id": "n41",
+      "midi": 60,
+      "beat": 25,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n42",
+      "midi": 69,
+      "beat": 26,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "I"
+    },
+    {
+      "id": "n43",
+      "midi": 72,
+      "beat": 27,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "once"
+    },
+    {
+      "id": "n44",
+      "midi": 41,
+      "beat": 27,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n45",
+      "midi": 48,
+      "beat": 27.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n46",
+      "midi": 53,
+      "beat": 28,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n47",
+      "midi": 69,
+      "beat": 28.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n48",
+      "midi": 72,
+      "beat": 29,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "was"
+    },
+    {
+      "id": "n49",
+      "midi": 69,
+      "beat": 29.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "ous"
+    },
+    {
+      "id": "n50",
+      "midi": 65,
+      "beat": 30,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "lost"
+    },
+    {
+      "id": "n51",
+      "midi": 41,
+      "beat": 30,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n52",
+      "midi": 48,
+      "beat": 30.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n53",
+      "midi": 53,
+      "beat": 31,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n54",
+      "midi": 60,
+      "beat": 32,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "but"
+    },
+    {
+      "id": "n55",
+      "midi": 62,
+      "beat": 33,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 2,
+      "lyric": "now"
+    },
+    {
+      "id": "n56",
+      "midi": 46,
+      "beat": 33,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n57",
+      "midi": 50,
+      "beat": 33.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 4
+    },
+    {
+      "id": "n58",
+      "midi": 58,
+      "beat": 34,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n59",
+      "midi": 65,
+      "beat": 34.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n60",
+      "midi": 65,
+      "beat": 35,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "am"
+    },
+    {
+      "id": "n61",
+      "midi": 62,
+      "beat": 35.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 2
+    },
+    {
+      "id": "n62",
+      "midi": 60,
+      "beat": 36,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "found."
+    },
+    {
+      "id": "n63",
+      "midi": 41,
+      "beat": 36,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n64",
+      "midi": 48,
+      "beat": 36.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n65",
+      "midi": 53,
+      "beat": 37,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n66",
+      "midi": 60,
+      "beat": 38,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 1,
+      "lyric": "Was"
+    },
+    {
+      "id": "n67",
+      "midi": 65,
+      "beat": 39,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "blind"
+    },
+    {
+      "id": "n68",
+      "midi": 41,
+      "beat": 39,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n69",
+      "midi": 48,
+      "beat": 39.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n70",
+      "midi": 53,
+      "beat": 40,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n71",
+      "midi": 69,
+      "beat": 41,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "but"
+    },
+    {
+      "id": "n72",
+      "midi": 65,
+      "beat": 41.5,
+      "durationBeats": 0.5,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n73",
+      "midi": 69,
+      "beat": 42,
+      "durationBeats": 2,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "now"
+    },
+    {
+      "id": "n74",
+      "midi": 48,
+      "beat": 42,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n75",
+      "midi": 52,
+      "beat": 42.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 3
+    },
+    {
+      "id": "n76",
+      "midi": 60,
+      "beat": 43,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n77",
+      "midi": 67,
+      "beat": 44,
+      "durationBeats": 1,
+      "hand": "right",
+      "finger": 5,
+      "lyric": "I"
+    },
+    {
+      "id": "n78",
+      "midi": 65,
+      "beat": 45,
+      "durationBeats": 3,
+      "hand": "right",
+      "finger": 4,
+      "lyric": "see."
+    },
+    {
+      "id": "n79",
+      "midi": 41,
+      "beat": 45,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n80",
+      "midi": 48,
+      "beat": 45.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n81",
+      "midi": 53,
+      "beat": 46,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n82",
+      "midi": 65,
+      "beat": 48,
+      "durationBeats": 3,
+      "hand": "right",
+      "finger": 4
+    },
+    {
+      "id": "n83",
+      "midi": 41,
+      "beat": 48,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 2
+    },
+    {
+      "id": "n84",
+      "midi": 48,
+      "beat": 48.5,
+      "durationBeats": 0.5,
+      "hand": "left",
+      "finger": 5
+    },
+    {
+      "id": "n85",
+      "midi": 53,
+      "beat": 49,
+      "durationBeats": 2,
+      "hand": "left",
+      "finger": 2
+    }
+  ],
+  "phrases": [
+    {
+      "id": "p1",
+      "title": "Phrase 1",
+      "noteIds": [
+        "n01",
+        "n02",
+        "n03",
+        "n04",
+        "n05",
+        "n06",
+        "n07",
+        "n08",
+        "n09",
+        "n10",
+        "n11",
+        "n12",
+        "n13",
+        "n14",
+        "n15",
+        "n16",
+        "n17"
+      ]
+    },
+    {
+      "id": "p2",
+      "title": "Phrase 2",
+      "noteIds": [
+        "n18",
+        "n19",
+        "n20",
+        "n21",
+        "n22",
+        "n23",
+        "n24",
+        "n25",
+        "n26",
+        "n27",
+        "n28",
+        "n29",
+        "n30",
+        "n31",
+        "n32",
+        "n33",
+        "n34",
+        "n35",
+        "n36",
+        "n37"
+      ]
+    },
+    {
+      "id": "p3",
+      "title": "Phrase 3",
+      "noteIds": [
+        "n38",
+        "n39",
+        "n40",
+        "n41",
+        "n42",
+        "n43",
+        "n44",
+        "n45",
+        "n46",
+        "n47",
+        "n48",
+        "n49",
+        "n50",
+        "n51",
+        "n52",
+        "n53",
+        "n54",
+        "n55",
+        "n56",
+        "n57",
+        "n58",
+        "n59",
+        "n60",
+        "n61"
+      ]
+    },
+    {
+      "id": "p4",
+      "title": "Phrase 4",
+      "noteIds": [
+        "n62",
+        "n63",
+        "n64",
+        "n65",
+        "n66",
+        "n67",
+        "n68",
+        "n69",
+        "n70",
+        "n71",
+        "n72",
+        "n73",
+        "n74",
+        "n75",
+        "n76",
+        "n77",
+        "n78",
+        "n79",
+        "n80",
+        "n81"
+      ]
+    },
+    {
+      "id": "p5",
+      "title": "Phrase 5",
+      "noteIds": [
+        "n82",
+        "n83",
+        "n84",
+        "n85"
+      ]
+    }
+  ]
+}

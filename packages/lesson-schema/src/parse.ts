@@ -1,5 +1,6 @@
 import {
   LESSON_SCHEMA_VERSION,
+  type Difficulty,
   type Finger,
   type Lesson,
   type LessonNote,
@@ -44,8 +45,8 @@ function parseNote(value: unknown, index: number): LessonNote {
     throw new LessonParseError(`notes[${index}] must be an object`);
   }
   const hand = asString(value.hand, `notes[${index}].hand`);
-  if (hand !== "right") {
-    throw new LessonParseError(`notes[${index}].hand must be "right"`);
+  if (hand !== "right" && hand !== "left") {
+    throw new LessonParseError(`notes[${index}].hand must be "right" or "left"`);
   }
   const note: LessonNote = {
     id: asString(value.id, `notes[${index}].id`),
@@ -78,6 +79,14 @@ function parsePhrase(value: unknown, index: number): LessonPhrase {
       asString(id, `phrases[${index}].noteIds[${j}]`),
     ),
   };
+}
+
+function asDifficulty(value: unknown, label: string): Difficulty {
+  const text = asString(value, label);
+  if (text !== "beginner" && text !== "intermediate" && text !== "advanced") {
+    throw new LessonParseError(`${label} must be beginner, intermediate, or advanced`);
+  }
+  return text;
 }
 
 export function parseLesson(value: unknown): Lesson {
@@ -135,6 +144,7 @@ export function parseLesson(value: unknown): Lesson {
       asNumber(value.timeSignature[1], "timeSignature[1]"),
     ],
     defaultTempo: asNumber(value.defaultTempo, "defaultTempo"),
+    difficulty: asDifficulty(value.difficulty, "difficulty"),
     notes,
     phrases,
   };
@@ -159,7 +169,7 @@ export function notesForPhrase(lesson: Lesson, phraseId: string): LessonNote[] {
 
 export function notesForScope(lesson: Lesson, scopeId: string): LessonNote[] {
   if (scopeId === FULL_SONG_ID) {
-    return [...lesson.notes].sort((a, b) => a.beat - b.beat);
+    return [...lesson.notes].sort((a, b) => a.beat - b.beat || b.midi - a.midi);
   }
   return notesForPhrase(lesson, scopeId);
 }
