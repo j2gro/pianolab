@@ -2,10 +2,13 @@ import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import {
   createTransport,
   isPitchHit,
+  PITCH_EXPECTED_CENTS,
+  PITCH_RMS_MIN,
   PLAY_ALONG_COUNT_IN_SEC,
   playAlongCountDigit,
   playAlongLeadInSec,
   type DetectedNote,
+  type DetectionVerdict,
   type PracticeMode,
   type Transport,
   type TransportSnapshot,
@@ -23,6 +26,18 @@ import { KEY_TO_MIDI, startComputerKeyboard } from "../audio/keyboard";
 import { startMicPitch, type MicHearing } from "../audio/mic";
 import { startMidiAdapter } from "../audio/midiStub";
 import { createPianoSynth } from "../audio/synth";
+import {
+  copyMicLog,
+  downloadMicLog,
+  installMicLogConsole,
+  micLogEnabled,
+  micLogSize,
+  recordMicEvent,
+  recordMicSetup,
+  shouldSampleFrame,
+  startMicLog,
+  type MicContext,
+} from "../audio/telemetry";
 import { midiName } from "../piano/layout";
 import { ErrorBoundary } from "../ErrorBoundary";
 import type { KeyLight } from "../piano/PianoScene";
@@ -51,10 +66,10 @@ type Props = {
 
 const DIFFICULTY_ORDER: Difficulty[] = ["beginner", "intermediate", "advanced"];
 
-const MODES: { id: PracticeMode; label: string }[] = [
-  { id: "listen", label: "Listen" },
-  { id: "play-along", label: "Play along" },
-  { id: "wait", label: "Practice" },
+const MODES: { id: PracticeMode; label: string; short: string }[] = [
+  { id: "listen", label: "Listen", short: "Listen" },
+  { id: "play-along", label: "Play along", short: "Along" },
+  { id: "wait", label: "Practice", short: "Practice" },
 ];
 
 const DEFAULT_LEAD_IN_SEC = 2;
@@ -147,6 +162,57 @@ function replayChoiceFromKey(key: string): PracticeMode | "same" | null {
   return null;
 }
 
+function TempoSlider({ tempo, onTempo }: { tempo: number; onTempo: (tempo: number) => void }) {
+  return (
+    <label className="tempo-pill">
+      <span>
+        <span className="tempo-word">Tempo </span>
+        {tempo}
+      </span>
+      <input
+        type="range"
+        min={50}
+        max={140}
+        value={tempo}
+        aria-label="Tempo in BPM"
+        onChange={(e) => onTempo(Number(e.target.value))}
+      />
+    </label>
+  );
+}
+
+function SeekSlider({
+  sliderTime,
+  songDuration,
+  started,
+  onSeek,
+}: {
+  sliderTime: number;
+  songDuration: number;
+  started: boolean;
+  onSeek: (timeSec: number) => void;
+}) {
+  return (
+    <label className="tempo-pill seek-pill">
+      <span>
+        {formatPlayTime(sliderTime)}
+        <span className="seek-total"> / {formatPlayTime(songDuration)}</span>
+      </span>
+      <input
+        type="range"
+        min={0}
+        max={songDuration}
+        step={0.05}
+        value={sliderTime}
+        disabled={!started}
+        aria-label="Playback time"
+        aria-valuetext={formatPlayTime(sliderTime)}
+        onChange={(e) => onSeek(Number(e.target.value))}
+      />
+    </label>
+  );
+}
+
 export function PracticeView({
   lesson,
   lessons,
@@ -176,6 +242,7 @@ export function PracticeView({
   const [heldMidis, setHeldMidis] = useState<number[]>([]);
   const heldRef = useRef(new Set<number>());
   const [phraseOpen, setPhraseOpen] = useState(false);
+  const [logNote, setLogNote] = useState("");
   const scoredRef = useRef(false);
   const completeRef = useRef(false);
   const replayBusyRef = useRef(false);
@@ -186,11 +253,14 @@ export function PracticeView({
   const syncMicRef = useRef<() => void>(() => {});
   const cleanupRef = useRef<() => void>(() => {});
   const currentNoteIdRef = useRef<string | null>(notes[0]?.id ?? null);
-  const detectRef = useRef<(note: DetectedNote) => void>(() => {});
+  const detectRef = useRef<(note: DetectedNote, source: "mic" | "keys") => void>(() => {});
+  const snapshotRef = useRef(snapshot);
+  const micFrameRef = useRef<MicHearing | null>(null);
   const nowRef = useRef<() => number>(() => 0);
   const tempoRef = useRef(tempo);
   const playAgainRef = useRef<(next?: PracticeMode) => Promise<void>>(async () => {});
   const phraseMenuRef = useRef<HTMLDivElement>(null);
+  const hudMoreRef = useRef<HTMLDetailsElement>(null);
   const done = new Set(progressCompleted);
   const title = scopeTitle(lesson, phraseId);
   tempoRef.current = tempo;
@@ -221,7 +291,51 @@ export function PracticeView({
       void playAgainRef.current(choice === "same" ? undefined : choice);
       return;
     }
-    detectRef.current(note);
+    detectRef.current(note, source);
+  };
+
+  /** What the score was asking for, to read the mic log against. */
+  const micContext = (): MicContext => {
+    const snap = snapshotRef.current;
+    const secPerBeat = 60 / Math.max(1, tempoRef.current);
+    const expected = notes.find((item) => item.id === snap.currentNoteId) ?? null;
+    const previous = expected ? (notes[notes.indexOf(expected) - 1] ?? null) : null;
+    return {
+      timeSec: snap.timeSec,
+      waiting: snap.waiting,
+      expectedId: expected?.id ?? null,
+      expectedMidi: expected?.midi ?? null,
+      expectedState: expected ? (snap.states[expected.id] ?? null) : null,
+      sinceExpectedDue: expected ? snap.timeSec - expected.beat * secPerBeat : null,
+      previousMidi: previous?.midi ?? null,
+      sincePreviousDue: previous ? snap.timeSec - previous.beat * secPerBeat : null,
+      sounding: notesSoundingAt(notes, snap.timeSec, tempoRef.current).map((item) => ({
+        midi: item.midi,
+        sinceAttack: snap.timeSec - item.beat * secPerBeat,
+      })),
+    };
+  };
+
+  const recordInput = (
+    frame: MicHearing | null,
+    source: "mic" | "keys",
+    note: DetectedNote | null,
+    verdict: DetectionVerdict | null,
+  ) => {
+    recordMicEvent({
+      t: note?.t ?? frame?.t ?? 0,
+      source,
+      rms: frame?.rms ?? 0,
+      noiseFloor: frame?.noiseFloor ?? 0,
+      gate: frame?.gate ?? 0,
+      midi: note?.midi ?? frame?.midi ?? null,
+      cents: note?.cents ?? frame?.cents ?? null,
+      attack: note !== null,
+      verdict,
+      pitch: frame?.pitch ?? null,
+      onset: frame?.onset ?? null,
+      context: micContext(),
+    });
   };
 
   const start = async (sessionMode: PracticeMode = modeRef.current) => {
@@ -248,11 +362,32 @@ export function PracticeView({
       leadInSec: leadInSecFor(sessionMode, tempo),
     });
     transport.start();
-    setSnapshot(transport.tick());
+    const first = transport.tick();
+    snapshotRef.current = first;
+    setSnapshot(first);
     transportRef.current = transport;
     synthRef.current = synth;
 
+    startMicLog({
+      lesson: lesson.title,
+      phrase: title,
+      mode: sessionMode,
+      tempo: tempoRef.current,
+      score: notes.map((note) => ({
+        id: note.id,
+        name: midiName(note.midi),
+        midi: note.midi,
+        beat: note.beat,
+        durationBeats: note.durationBeats,
+      })),
+    });
+
     const onHearing = (frame: MicHearing) => {
+      micFrameRef.current = frame;
+      // An attack is logged with its verdict once the transport has ruled on it.
+      if (frame.attack === null && shouldSampleFrame(frame.pitch, frame.rms >= frame.gate)) {
+        recordInput(frame, "mic", null, null);
+      }
       const nowMs = performance.now();
       if (nowMs - lastHearMs < 80) {
         return;
@@ -262,7 +397,7 @@ export function PracticeView({
         micReplayReadyRef.current = true;
       }
       if (frame.midi === null) {
-        setHeard(frame.rms > 0.003 ? "Mic hears sound, no pitch yet" : "Mic on · play a note");
+        setHeard(frame.rms > PITCH_RMS_MIN ? "Mic hears sound, no pitch yet" : "Mic on · play a note");
         return;
       }
       const detune = Math.round(frame.cents ?? 0);
@@ -270,9 +405,9 @@ export function PracticeView({
       setHeard(`Heard ${midiName(frame.midi)} ${sign}${detune}¢`);
     };
 
-    const onDetected = (note: { midi: number; cents: number; t: number }) => {
+    const onDetected = (note: DetectedNote, source: "mic" | "keys") => {
       const current = notes.find((item) => item.id === currentNoteIdRef.current);
-      const ok = current ? isPitchHit(current.midi, note, 50) : false;
+      const ok = current ? isPitchHit(current.midi, note, PITCH_EXPECTED_CENTS) : false;
       const until = performance.now() + 1400;
       const motionUntil = performance.now() + 280;
       setPresses((prev) => {
@@ -283,7 +418,8 @@ export function PracticeView({
         ];
       });
       setHeard(ok ? `Played ${midiName(note.midi)} — correct` : `Played ${midiName(note.midi)} — wrong`);
-      transport.reportDetected(note);
+      const verdict = transport.reportDetected(note);
+      recordInput(source === "mic" ? micFrameRef.current : null, source, note, verdict);
     };
 
     detectRef.current = onDetected;
@@ -318,7 +454,25 @@ export function PracticeView({
         return;
       }
       micStarting = true;
-      void startMicPitch(ctx, (note) => playInput(note, "mic"), onHearing)
+      void startMicPitch(ctx, {
+        onDetected: (note) => playInput(note, "mic"),
+        onHearing,
+        expectedMidi: () => {
+          if (completeRef.current) {
+            return null;
+          }
+          return notes.find((item) => item.id === currentNoteIdRef.current)?.midi ?? null;
+        },
+        previousMidi: () => {
+          if (completeRef.current) {
+            return null;
+          }
+          const index = notes.findIndex((item) => item.id === currentNoteIdRef.current);
+          return index > 0 ? (notes[index - 1]?.midi ?? null) : null;
+        },
+        diagnostics: micLogEnabled(),
+        onSetup: recordMicSetup,
+      })
         .then((stop) => {
           micStarting = false;
           if (cleaned || !micWanted()) {
@@ -361,6 +515,7 @@ export function PracticeView({
       }
       const snap = transport.tick();
       currentNoteIdRef.current = snap.currentNoteId;
+      snapshotRef.current = snap;
       const nowMs = performance.now();
       setPresses((prev) => (prev.some((press) => press.until <= nowMs) ? prev.filter((press) => press.until > nowMs) : prev));
       if (modeRef.current === "listen") {
@@ -511,6 +666,7 @@ export function PracticeView({
   }, [heldMidis, notes, presses, snapshot.beat]);
 
   useEffect(() => {
+    installMicLogConsole();
     return () => cleanupRef.current();
   }, []);
 
@@ -564,6 +720,26 @@ export function PracticeView({
       window.removeEventListener("keydown", onKey);
     };
   }, [phraseOpen]);
+
+  useEffect(() => {
+    const onPointer = (event: PointerEvent) => {
+      const menu = hudMoreRef.current;
+      if (menu && !menu.contains(event.target as Node)) {
+        menu.open = false;
+      }
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && hudMoreRef.current) {
+        hudMoreRef.current.open = false;
+      }
+    };
+    window.addEventListener("pointerdown", onPointer);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("pointerdown", onPointer);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, []);
 
   const pickScope = (id: string) => {
     setPhraseOpen(false);
@@ -650,36 +826,34 @@ export function PracticeView({
     <div className="practice">
       <div className="hud">
         <div className="hud-meta">
-          <button type="button" className="link" onClick={onSignOut}>
+          <button type="button" className="link hud-signout" onClick={onSignOut}>
             Sign out
           </button>
-          <div>
-            <label className="song-picker">
-              <span className="sr-only">Song</span>
-              <select
-                aria-label="Song"
-                value={lesson.id}
-                onChange={(event) => onLesson(event.target.value)}
-              >
-                {DIFFICULTY_ORDER.map((level) => {
-                  const items = lessons.filter((item) => item.difficulty === level);
-                  if (items.length === 0) {
-                    return null;
-                  }
-                  return (
-                    <optgroup key={level} label={DIFFICULTY_LABEL[level]}>
-                      {items.map((item) => (
-                        <option key={item.id} value={item.id}>
-                          {item.title}
-                        </option>
-                      ))}
-                    </optgroup>
-                  );
-                })}
-              </select>
-            </label>
-            <span>{email}</span>
-          </div>
+          <label className="song-picker">
+            <span className="sr-only">Song</span>
+            <select
+              aria-label="Song"
+              value={lesson.id}
+              onChange={(event) => onLesson(event.target.value)}
+            >
+              {DIFFICULTY_ORDER.map((level) => {
+                const items = lessons.filter((item) => item.difficulty === level);
+                if (items.length === 0) {
+                  return null;
+                }
+                return (
+                  <optgroup key={level} label={DIFFICULTY_LABEL[level]}>
+                    {items.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.title}
+                      </option>
+                    ))}
+                  </optgroup>
+                );
+              })}
+            </select>
+          </label>
+          <span className="hud-email">{email}</span>
         </div>
         <div className="hud-pills">
           <div className="mode-toggle" role="radiogroup" aria-label="Practice mode">
@@ -688,59 +862,95 @@ export function PracticeView({
                 key={item.id}
                 type="button"
                 role="radio"
+                aria-label={item.label}
                 aria-checked={mode === item.id}
                 className={mode === item.id ? "selected" : ""}
                 onClick={() => onMode(item.id)}
               >
-                {item.label}
+                <span className="mode-full">{item.label}</span>
+                <span className="mode-compact">{item.short}</span>
               </button>
             ))}
           </div>
-          <label className="tempo-pill">
-            <span>Tempo {tempo}</span>
-            <input
-              type="range"
-              min={50}
-              max={140}
-              value={tempo}
-              aria-label="Tempo in BPM"
-              onChange={(e) => onTempo(Number(e.target.value))}
-            />
+          <label className="mode-select">
+            <span className="sr-only">Practice mode</span>
+            <select
+              aria-label="Practice mode"
+              value={mode}
+              onChange={(event) => onMode(event.target.value as PracticeMode)}
+            >
+              {MODES.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.short}
+                </option>
+              ))}
+            </select>
           </label>
-          <label className="tempo-pill seek-pill">
-            <span>
-              {formatPlayTime(sliderTime)} / {formatPlayTime(songDuration)}
-            </span>
-            <input
-              type="range"
-              min={0}
-              max={songDuration}
-              step={0.05}
-              value={sliderTime}
-              disabled={!started}
-              aria-label="Playback time"
-              aria-valuetext={formatPlayTime(sliderTime)}
-              onChange={(e) => seekPlayback(Number(e.target.value))}
+          <div className="hud-bar-sliders">
+            <TempoSlider tempo={tempo} onTempo={onTempo} />
+            <SeekSlider
+              sliderTime={sliderTime}
+              songDuration={songDuration}
+              started={started}
+              onSeek={seekPlayback}
             />
-          </label>
+          </div>
           {!started ? (
-            <button type="button" onClick={() => void start()}>
+            <button type="button" className="hud-action" onClick={() => void start()}>
               Start
             </button>
           ) : canPause ? (
-            <button type="button" className="secondary" onClick={togglePause}>
+            <button type="button" className="secondary hud-action" onClick={togglePause}>
               {snapshot.running ? "Pause" : "Resume"}
             </button>
           ) : (
-            <span className="pill">
-              {complete ? "complete" : snapshot.waiting ? "waiting" : snapshot.running ? "playing" : "idle"}
+            <span className="pill hud-state">
+              {complete ? "done" : snapshot.waiting ? "wait" : snapshot.running ? "play" : "idle"}
             </span>
           )}
           {started ? (
-            <button type="button" className="secondary" onClick={restartPlayback}>
+            <button type="button" className="secondary hud-action" onClick={restartPlayback}>
               Restart
             </button>
           ) : null}
+          <details className="hud-more" ref={hudMoreRef}>
+            <summary aria-label="More menu">More</summary>
+            <div className="hud-more-panel">
+              <div className="hud-more-sliders">
+                <TempoSlider tempo={tempo} onTempo={onTempo} />
+                <SeekSlider
+                  sliderTime={sliderTime}
+                  songDuration={songDuration}
+                  started={started}
+                  onSeek={seekPlayback}
+                />
+              </div>
+              {micLogEnabled() ? (
+                <div className="hud-more-log">
+                  <button
+                    type="button"
+                    className="link"
+                    onClick={() => {
+                      const frames = micLogSize();
+                      void copyMicLog().then((copied) => {
+                        setLogNote(copied ? `Copied ${frames} frames` : "Copy blocked — download it");
+                      });
+                    }}
+                  >
+                    Copy mic log
+                  </button>
+                  <button type="button" className="link" onClick={downloadMicLog}>
+                    Save mic log
+                  </button>
+                  {logNote ? <span className="hint">{logNote}</span> : null}
+                </div>
+              ) : null}
+              <p className="hud-email">{email}</p>
+              <button type="button" className="link" onClick={onSignOut}>
+                Sign out
+              </button>
+            </div>
+          </details>
         </div>
       </div>
       <div className="scene">

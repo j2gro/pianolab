@@ -2,9 +2,7 @@ import type { DetectedNote } from "./types";
 
 export function midiDistanceCents(expectedMidi: number, detected: DetectedNote): number {
   const heard = detected.midi + detected.cents / 100;
-  let diff = heard - expectedMidi;
-  diff -= 12 * Math.round(diff / 12);
-  return Math.abs(diff) * 100;
+  return Math.abs(heard - expectedMidi) * 100;
 }
 
 export function isPitchHit(
@@ -20,4 +18,8 @@ export function frequencyToMidi(frequency: number): { midi: number; cents: numbe
   const midi = Math.round(midiFloat);
   const cents = (midiFloat - midi) * 100;
   return { midi, cents };
+}
+
+export function midiToFrequency(midi: number, cents = 0): number {
+  return 440 * 2 ** ((midi - 69 + cents / 100) / 12);
 }

@@ -24,7 +24,6 @@ test("Wait advances only after a simulated hit", () => {
     tempo: 60,
     mode: "wait",
     now: () => t,
-    stableMs: 0,
   });
   transport.start();
 
@@ -53,6 +52,34 @@ test("Wait advances only after a simulated hit", () => {
   assert.equal(snap.states.b, "waiting");
 });
 
+test("reportDetected says what it did with the note", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 }), note({ id: "b", midi: 62, beat: 1 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "wait",
+    now: () => t,
+  });
+
+  assert.equal(transport.reportDetected({ midi: 60, cents: 0, t }), "idle");
+  transport.start();
+  t = 2;
+  transport.tick();
+  assert.equal(transport.reportDetected({ midi: 64, cents: 0, t }), "wrong");
+  assert.equal(transport.reportDetected({ midi: 60, cents: 0, t }), "hit");
+
+  transport.setMode("listen");
+  assert.equal(transport.reportDetected({ midi: 62, cents: 0, t }), "listen-mode");
+
+  transport.setMode("play-along");
+  assert.equal(transport.reportDetected({ midi: 62, cents: 0, t }), "not-due");
+  t = 3;
+  transport.tick();
+  assert.equal(transport.reportDetected({ midi: 62, cents: 0, t }), "hit");
+  assert.equal(transport.reportDetected({ midi: 62, cents: 0, t }), "lesson-done");
+});
+
 test("Play-along never pauses and misses after the late window", () => {
   let t = 0;
   const notes = [note({ id: "a", midi: 60, beat: 0 })];
@@ -61,7 +88,6 @@ test("Play-along never pauses and misses after the late window", () => {
     tempo: 60,
     mode: "play-along",
     now: () => t,
-    stableMs: 0,
     lateMs: 150,
   });
   transport.start();
@@ -85,7 +111,6 @@ test("Listen ignores the matcher and auto-hits on attack", () => {
     tempo: 60,
     mode: "listen",
     now: () => t,
-    stableMs: 0,
   });
   transport.start();
   transport.reportDetected({ midi: 72, cents: 0, t: 0 });
@@ -99,9 +124,12 @@ test("Listen ignores the matcher and auto-hits on attack", () => {
 
 test("matcher accepts pitches inside the cents window", () => {
   assert.equal(isPitchHit(60, { midi: 60, cents: 40, t: 0 }, 50), true);
-  assert.equal(isPitchHit(60, { midi: 72, cents: 10, t: 0 }, 50), true);
-  assert.equal(isPitchHit(60, { midi: 48, cents: 0, t: 0 }, 50), true);
   assert.equal(isPitchHit(60, { midi: 62, cents: 0, t: 0 }, 50), false);
+});
+
+test("matcher counts the wrong octave as a wrong note", () => {
+  assert.equal(isPitchHit(60, { midi: 72, cents: 10, t: 0 }, 50), false);
+  assert.equal(isPitchHit(60, { midi: 48, cents: 0, t: 0 }, 50), false);
 });
 
 test("YIN estimates a 440Hz sine", () => {
@@ -126,7 +154,6 @@ test("Listen to wait pauses on the sounding note", () => {
     tempo: 60,
     mode: "listen",
     now: () => t,
-    stableMs: 0,
   });
   transport.start();
   t = 0.4;
@@ -151,7 +178,6 @@ test("Wait to listen resumes autoplay from the current note", () => {
     tempo: 60,
     mode: "wait",
     now: () => t,
-    stableMs: 0,
   });
   transport.start();
   let snap = transport.tick();
@@ -182,7 +208,6 @@ test("Pause freezes listen playback until start resumes", () => {
     tempo: 60,
     mode: "listen",
     now: () => t,
-    stableMs: 0,
   });
   transport.start();
   t = 0.5;
@@ -223,7 +248,6 @@ test("lead-in delays beat 0 until the count-in elapses", () => {
     mode: "listen",
     now: () => t,
     leadInSec: 2,
-    stableMs: 0,
   });
   transport.start();
   let snap = transport.tick();
@@ -268,7 +292,6 @@ test("play-along lead-in does not miss the first note", () => {
     mode: "play-along",
     now: () => t,
     leadInSec: 5,
-    stableMs: 0,
     lateMs: 150,
   });
   transport.start();
@@ -291,7 +314,6 @@ test("setTempo keeps the current beat and changes speed", () => {
     tempo: 60,
     mode: "listen",
     now: () => t,
-    stableMs: 0,
   });
   transport.start();
   t = 1;
@@ -331,7 +353,6 @@ test("seek jumps listen time and note states", () => {
     tempo: 60,
     mode: "listen",
     now: () => t,
-    stableMs: 0,
   });
   transport.start();
   t = 0.2;
@@ -361,7 +382,6 @@ test("seek while paused stays paused", () => {
     tempo: 60,
     mode: "listen",
     now: () => t,
-    stableMs: 0,
   });
   transport.start();
   t = 0.4;
@@ -388,7 +408,6 @@ test("seek in wait gates on the note at the playhead", () => {
     tempo: 60,
     mode: "wait",
     now: () => t,
-    stableMs: 0,
   });
   transport.start();
   transport.tick();
@@ -420,7 +439,6 @@ test("restart returns to lead-in with upcoming notes", () => {
     mode: "listen",
     now: () => t,
     leadInSec: 2,
-    stableMs: 0,
   });
   transport.start();
   t = 3;
@@ -439,4 +457,67 @@ test("restart returns to lead-in with upcoming notes", () => {
   snap = transport.tick();
   assert.ok(Math.abs(snap.timeSec) < 1e-6);
   assert.equal(snap.states.a, "hit");
+});
+
+test("Wait accepts the expected pitch during lead-in", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 }), note({ id: "b", midi: 62, beat: 1 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "wait",
+    now: () => t,
+    leadInSec: 2,
+  });
+  transport.start();
+  let snap = transport.tick();
+  assert.equal(snap.timeSec, -2);
+  assert.equal(snap.states.a, "upcoming");
+  assert.equal(snap.waiting, false);
+
+  transport.reportDetected({ midi: 60, cents: 0, t: 0 });
+  snap = transport.tick();
+  assert.equal(snap.states.a, "hit");
+  assert.equal(snap.waiting, false);
+});
+
+test("Wait ignores wrong pitches during lead-in", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "wait",
+    now: () => t,
+    leadInSec: 2,
+  });
+  transport.start();
+  transport.tick();
+  transport.reportDetected({ midi: 64, cents: 0, t: 0 });
+  const snap = transport.tick();
+  assert.equal(snap.states.a, "upcoming");
+  assert.equal(snap.wrongFlashIds.length, 0);
+});
+
+test("each reported attack scores exactly once", () => {
+  let t = 0;
+  const notes = [note({ id: "a", midi: 60, beat: 0 })];
+  const transport = createTransport({
+    notes,
+    tempo: 60,
+    mode: "wait",
+    now: () => t,
+  });
+  transport.start();
+  transport.tick();
+
+  transport.reportDetected({ midi: 64, cents: 0, t });
+  assert.equal(transport.stats().wrongs, 1);
+  t = 0.5;
+  transport.reportDetected({ midi: 64, cents: 0, t });
+  assert.equal(transport.stats().wrongs, 2);
+
+  transport.reportDetected({ midi: 60, cents: 0, t });
+  assert.equal(transport.stats().hits, 1);
+  assert.equal(transport.tick().states.a, "hit");
 });

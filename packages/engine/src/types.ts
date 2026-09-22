@@ -16,6 +16,21 @@ export type DetectedNote = {
   t: number;
 };
 
+/** What the transport did with a reported note. */
+export type DetectionVerdict =
+  | "hit"
+  | "wrong"
+  /** The transport is not running. */
+  | "idle"
+  /** Listen mode scores nothing. */
+  | "listen-mode"
+  /** Every note is already resolved. */
+  | "lesson-done"
+  /** Play-along: the note is not in its window. */
+  | "not-due"
+  /** Wait mode: the note is not being waited on. */
+  | "not-expected";
+
 export type TransportSnapshot = {
   timeSec: number;
   beat: number;
@@ -39,5 +54,4 @@ export type TransportOptions = {
   earlyMs?: number;
   lateMs?: number;
   wrongFlashMs?: number;
-  stableMs?: number;
 };

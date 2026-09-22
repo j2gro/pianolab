@@ -2,6 +2,7 @@ import type { LessonNote } from "@pianolab/lesson-schema";
 import { isPitchHit } from "./matcher";
 import type {
   DetectedNote,
+  DetectionVerdict,
   NoteVisualState,
   PracticeMode,
   TransportOptions,
@@ -11,15 +12,10 @@ import type {
 const DEFAULT_EARLY_MS = 80;
 const DEFAULT_LATE_MS = 150;
 const DEFAULT_WRONG_FLASH_MS = 300;
-const DEFAULT_STABLE_MS = 40;
 const DEFAULT_CENTS = 60;
 
 function beatToSec(beat: number, tempo: number): number {
   return (beat * 60) / tempo;
-}
-
-function pitchClass(midi: number): number {
-  return ((midi % 12) + 12) % 12;
 }
 
 function isTerminal(state: NoteVisualState): boolean {
@@ -32,7 +28,6 @@ export function createTransport(options: TransportOptions) {
   const earlyMs = options.earlyMs ?? DEFAULT_EARLY_MS;
   const lateMs = options.lateMs ?? DEFAULT_LATE_MS;
   const wrongFlashMs = options.wrongFlashMs ?? DEFAULT_WRONG_FLASH_MS;
-  const stableMs = options.stableMs ?? DEFAULT_STABLE_MS;
 
   let tempo = options.tempo;
   let mode: PracticeMode = options.mode;
@@ -54,8 +49,6 @@ export function createTransport(options: TransportOptions) {
     states[note.id] = "upcoming";
   }
 
-  let stablePc: number | null = null;
-  let stableSince = 0;
   let pendingAttacks: string[] = [];
 
   function now(): number {
@@ -276,34 +269,24 @@ export function createTransport(options: TransportOptions) {
     };
   }
 
-  function reportDetected(detected: DetectedNote): void {
-    if (!running || mode === "listen") {
-      return;
+  function reportDetected(detected: DetectedNote): DetectionVerdict {
+    if (!running) {
+      return "idle";
+    }
+    if (mode === "listen") {
+      return "listen-mode";
     }
 
     const snap = tick();
     const current = currentUnresolved();
     if (!current) {
-      return;
-    }
-
-    if (stablePc === pitchClass(detected.midi)) {
-      // keep since
-    } else {
-      stablePc = pitchClass(detected.midi);
-      stableSince = detected.t;
-    }
-    const stable = detected.t - stableSince >= stableMs / 1000 || stableMs === 0;
-    if (!stable) {
-      return;
+      return "lesson-done";
     }
 
     const hit = isPitchHit(current.midi, detected, centsTolerance);
 
     if (mode === "wait") {
-      if (!snap.waiting && states[current.id] !== "due" && states[current.id] !== "waiting") {
-        return;
-      }
+      const expected = snap.waiting || states[current.id] === "due" || states[current.id] === "waiting";
       if (hit) {
         states[current.id] = "hit";
         hits += 1;
@@ -311,28 +294,30 @@ export function createTransport(options: TransportOptions) {
           waitDurationsMs.push(Math.round((now() - waitStartedAt) * 1000));
           waitStartedAt = null;
         }
-        stablePc = null;
         waitFreezeSec = null;
-      } else {
+        return "hit";
+      }
+      if (expected) {
         wrongUntil[current.id] = now() + wrongFlashMs / 1000;
         states[current.id] = "waiting";
         wrongs += 1;
+        return "wrong";
       }
-      return;
+      return "not-expected";
     }
 
     if (states[current.id] !== "due") {
-      return;
+      return "not-due";
     }
     if (hit) {
       states[current.id] = "hit";
       hits += 1;
-      stablePc = null;
-    } else {
-      states[current.id] = "wrong";
-      wrongUntil[current.id] = now() + wrongFlashMs / 1000;
-      wrongs += 1;
+      return "hit";
     }
+    states[current.id] = "wrong";
+    wrongUntil[current.id] = now() + wrongFlashMs / 1000;
+    wrongs += 1;
+    return "wrong";
   }
 
   return {
@@ -368,7 +353,6 @@ export function createTransport(options: TransportOptions) {
       waitStartedAt = null;
       waitFreezeSec = null;
       pendingAttacks = [];
-      stablePc = null;
       userPausedAt = null;
       startedAt = now() + leadInSec;
       pauseAccum = 0;

@@ -139,29 +139,47 @@ select {
   height: 100svh;
   display: flex;
   flex-direction: column;
+  container-type: inline-size;
+  container-name: practice;
 }
 
 .hud {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.45rem 0.85rem;
+  gap: 0.5rem 0.75rem;
+  padding: 0.4rem 0.85rem;
   background: #0b0d12;
   flex: 0 0 auto;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  min-height: 2.75rem;
 }
 
 .hud-meta {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  min-width: 10rem;
+  gap: 0.65rem;
+  min-width: 0;
+  flex: 1 1 8rem;
+}
+
+.hud-email {
+  color: #9ca3af;
+  font-size: 0.78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 14rem;
+}
+
+.song-picker {
+  min-width: 0;
 }
 
 .song-picker select {
-  max-width: min(22rem, 62vw);
+  max-width: min(22rem, 42vw);
   padding: 0.35rem 0.55rem;
+  text-overflow: ellipsis;
 }
 
 .sr-only {
@@ -180,8 +198,100 @@ select {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 0.45rem;
+  flex-wrap: nowrap;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.hud-bar-sliders {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.mode-select {
+  display: none;
+  min-width: 0;
+}
+
+.mode-select select {
+  padding: 0.28rem 0.4rem;
+  max-width: 7.5rem;
+}
+
+.hud-more-sliders {
+  display: none;
   gap: 0.55rem;
-  flex-wrap: wrap;
+}
+
+.hud-more-sliders .tempo-pill {
+  width: 100%;
+  border-radius: 12px;
+  padding: 0.45rem 0.6rem;
+}
+
+.hud-more-sliders .tempo-pill input {
+  width: 100%;
+  min-width: 0;
+}
+
+.mode-compact {
+  display: none;
+}
+
+.hud-action {
+  padding: 0.4rem 0.8rem;
+  white-space: nowrap;
+}
+
+.hud-more {
+  display: none;
+  position: relative;
+}
+
+.hud-more summary {
+  list-style: none;
+  cursor: pointer;
+  background: #1f2937;
+  color: #e5e7eb;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.hud-more summary::-webkit-details-marker {
+  display: none;
+}
+
+.hud-more-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  z-index: 12;
+  display: grid;
+  gap: 0.45rem;
+  min-width: 12rem;
+  padding: 0.7rem 0.85rem;
+  background: #111827f2;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px #00000066;
+}
+
+.hud-more-panel .hud-email {
+  display: block;
+  max-width: none;
+}
+
+.hud-more-log {
+  display: grid;
+  gap: 0.25rem;
+  justify-items: start;
+  padding-top: 0.35rem;
+  border-top: 1px solid #374151;
 }
 
 .mode-toggle {
@@ -215,6 +325,7 @@ select {
   border-radius: 999px;
   font-size: 0.8rem;
   color: #d1d5db;
+  white-space: nowrap;
 }
 
 .tempo-pill input {
@@ -227,6 +338,82 @@ select {
 
 .seek-pill input {
   width: 9rem;
+}
+
+@container practice (max-width: 1080px) {
+  .hud-meta > .hud-email,
+  .hud-signout {
+    display: none;
+  }
+
+  .hud-more {
+    display: block;
+  }
+
+  .mode-full {
+    display: none;
+  }
+
+  .mode-compact {
+    display: inline;
+  }
+
+  .hud-bar-sliders .tempo-word,
+  .hud-bar-sliders .seek-total {
+    display: none;
+  }
+
+  .song-picker select {
+    max-width: 11rem;
+  }
+
+  .tempo-pill input {
+    width: 4.75rem;
+  }
+
+  .seek-pill input {
+    width: 5.5rem;
+  }
+}
+
+@container practice (max-width: 740px) {
+  .hud {
+    padding: 0.28rem 0.4rem;
+    gap: 0.35rem;
+    min-height: 0;
+  }
+
+  .song-picker select {
+    max-width: 7.25rem;
+    font-size: 0.82rem;
+    padding: 0.22rem 0.3rem;
+  }
+
+  .mode-toggle {
+    display: none;
+  }
+
+  .mode-select {
+    display: block;
+  }
+
+  .hud-bar-sliders {
+    display: none;
+  }
+
+  .hud-more-sliders {
+    display: grid;
+  }
+
+  .hud-action {
+    padding: 0.28rem 0.55rem;
+    font-size: 0.8rem;
+  }
+
+  .hud-more summary {
+    padding: 0.28rem 0.55rem;
+    font-size: 0.75rem;
+  }
 }
 
 .phrase-dock {
@@ -288,15 +475,11 @@ select {
   font-style: normal;
 }
 
-.hud span,
-.hud strong {
-  display: block;
-}
-
 .pill {
   background: #1f2937;
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
+  white-space: nowrap;
 }
 
 .scene-caption {

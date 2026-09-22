@@ -3,6 +3,9 @@ export type YinResult = {
   probability: number;
 };
 
+export const YIN_MIN_HZ = 70;
+export const YIN_MAX_HZ = 1000;
+
 export function yinPitch(
   buf: Float32Array,
   sampleRate: number,
@@ -32,8 +35,8 @@ export function yinPitch(
     cmndf[tau] = (diff[tau]! * tau) / running;
   }
 
-  const tauMin = Math.max(2, Math.floor(sampleRate / 1000));
-  const tauMax = Math.min(half - 1, Math.floor(sampleRate / 70));
+  const tauMin = Math.max(2, Math.floor(sampleRate / YIN_MAX_HZ));
+  const tauMax = Math.min(half - 1, Math.floor(sampleRate / YIN_MIN_HZ));
   let tauEst = -1;
   for (let tau = tauMin; tau < tauMax; tau++) {
     if (cmndf[tau]! < threshold) {
@@ -71,4 +74,31 @@ export function rms(buf: Float32Array): number {
     sum += s * s;
   }
   return Math.sqrt(sum / buf.length);
+}
+
+/**
+ * Goertzel power at one frequency as a share of total buffer power. Periodicity
+ * alone cannot tell a note from an isolated partial of it, because a tone at
+ * 3*f0 repeats at f0 too; this says whether that frequency carries any energy.
+ */
+export function toneStrengthAt(buf: Float32Array, sampleRate: number, frequency: number): number {
+  const n = buf.length;
+  if (n < 32 || frequency <= 0 || frequency >= sampleRate / 2) {
+    return 0;
+  }
+  const coeff = 2 * Math.cos((2 * Math.PI * frequency) / sampleRate);
+  let s1 = 0;
+  let s2 = 0;
+  let energy = 0;
+  for (let i = 0; i < n; i++) {
+    const x = buf[i]!;
+    const s0 = x + coeff * s1 - s2;
+    s2 = s1;
+    s1 = s0;
+    energy += x * x;
+  }
+  if (energy <= 1e-20) {
+    return 0;
+  }
+  return (s1 * s1 + s2 * s2 - coeff * s1 * s2) / (energy * n);
 }
